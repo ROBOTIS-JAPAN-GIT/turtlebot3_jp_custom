@@ -4,11 +4,32 @@
 
 	<link name="base"/>
 
-	<joint name="dynamixel_fix" type="fixed">
+	<joint name="base_puntilt" type="fixed">
 		<parent link="base"/>
-		<child link="dynx_2XL430"/>
+		<child link="dynx_2XL430_hone_yaw"/>
 		<origin xyz="0 0 0" rpy="0 0 0"/>
 	</joint>
+
+	<joint name="2XL430_yaw_joint" type="fixed">
+		<parent link="dynx_2XL430_hone_yaw"/>
+		<child link="dynx_2XL430"/>
+		<origin xyz="${0/1000} ${12/1000} ${19/1000}" rpy="3.1415926535 0 0"/>
+		<!--6.3879[rad/sec]=61[rev/min], 1.5[Nm]-->
+		<!-- <limit velocity="6.3879" effort="1.5" />  -->
+		<!-- <limit lower="-3.1" upper="3.1" velocity="6.3879" effort="1.5" /> 
+	   <dynamics damping="0.1"/>           
+		<axis xyz="0 0 1"/> -->
+	</joint>
+
+	<link name="dynx_2XL430_hone_yaw">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder length="0.001" radius="0.01"/>
+			</geometry>
+			<material name="orange"/>
+		</visual>
+	</link>
 
 	<link name="dynx_2XL430">
 			<inertial>
@@ -29,53 +50,36 @@
 				</geometry>
 			</collision>
 	</link>
-	<gazebo reference="dynx_2XL430">
-		<material>Gazebo/Grey</material>
-	</gazebo>
-
-	<joint name="2XL430_yaw_joint" type="fixed">
-		<parent link="dynx_2XL430"/>
-		<child link="hone1"/>
-		<origin xyz="${0/1000} ${12/1000} ${19/1000}" rpy="0 0 0"/>
-		<!--6.3879[rad/sec]=61[rev/min], 1.5[Nm]-->
-		<!-- <limit velocity="6.3879" effort="1.5" />  -->
-		<!-- <limit lower="-3.1" upper="3.1" velocity="6.3879" effort="1.5" /> 
-	   <dynamics damping="0.1"/>           
-		<axis xyz="0 0 1"/> -->
-	</joint>
-	<link name="hone1">
-		<visual>
-			<origin xyz="0 0 0.0005" rpy="0 0 0"/>
-			<geometry>
-				<box size="0.01 0.02 0.001"/>
-			</geometry>
-			<material name="orange"/>
-		</visual>
-	</link>
-	<gazebo reference="hone1">
-		<material>Gazebo/Orange</material>
-	</gazebo>
-
 
 	<joint name="2XL430_pitch_joint" type="fixed">
 		<parent link="dynx_2XL430"/>
-		<child link="hone2"/>
+		<child link="dynx_2XL430_hone_pitch"/>
 		<origin xyz="${19/1000} ${-12/1000} ${0/1000}" rpy="0 0 0"/>
 		<!--6.3879[rad/sec]=61[rev/min], 1.5[Nm]-->
 		<!-- <limit velocity="6.3879" effort="1.5" /> 
 	   <dynamics damping="0.1"/>           
 		<axis xyz="1 0 0"/> -->
 	</joint>
-	<link name="hone2">
+
+	<link name="dynx_2XL430_hone_pitch">
 		<visual>
-			<origin xyz="0.0005 0 0" rpy="0 0 0"/>
+			<origin xyz="0 0 0" rpy="0 ${3.1415926535/2} 0"/>
 			<geometry>
-				<box size="0.001 0.02 0.01"/>
+				<cylinder length="0.001" radius="0.01"/>
 			</geometry>
 			<material name="red"/>
 		</visual>
 	</link>
-	<gazebo reference="hone2">
+
+	<gazebo reference="dynx_2XL430">
+		<material>Gazebo/Grey</material>
+	</gazebo>
+
+	<gazebo reference="dynx_2XL430_hone_yaw">
+		<material>Gazebo/Orange</material>
+	</gazebo>
+	
+	<gazebo reference="dynx_2XL430_hone_pitch">
 		<material>Gazebo/Red</material>
 	</gazebo>
 

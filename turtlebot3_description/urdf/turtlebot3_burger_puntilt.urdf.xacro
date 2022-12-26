@@ -1,7 +1,14 @@
 <?xml version="1.0" ?>
 <robot name="turtlebot3_burger" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find turtlebot3_description)/urdf/common_properties.xacro"/>
-  <xacro:include filename="$(find turtlebot3_description)/urdf/turtlebot3_burger.gazebo.xacro"/>
+  <xacro:include filename="$(find turtlebot3_description)/urdf/turtlebot3_burger_puntilt.gazebo.xacro"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+	<xacro:include filename="$(find turtlebot3_description)/urdf/_2XL430.urdf.xacro"/>
+
+  <!-- realsense 関連の引数 -->
+  <xacro:arg name="use_nominal_extrinsics" default="true"/>
+  <xacro:arg name="add_plug" default="false" />
+  <xacro:arg name="use_mesh" default="true" />
 
   <link name="base_footprint"/>
 
@@ -123,6 +130,7 @@
     </inertial>
   </link>
 
+  <!--* Sensor -->
   <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
     <child link="imu_link"/>
@@ -162,4 +170,20 @@
     </inertial>
   </link>
 
+  <!--* Sensor -->
+  <joint name="puntilt_base" type="fixed">
+		<parent link="base_link"/>
+		<child link="base_puntilt"/>
+		<origin xyz="0.015 0.0 0.171" rpy="0 0 ${-pi/2}"/>
+	</joint>
+
+	<link name="base_puntilt"/>
+
+	<xacro:motor_2XL430 parent="base_puntilt" center_parent="false" child="base_realsense" center_child="true" />
+	
+	<link name="base_realsense"/>
+
+  <xacro:sensor_d435 parent="base_realsense" use_nominal_extrinsics="$(arg use_nominal_extrinsics)" add_plug="$(arg add_plug)" use_mesh="$(arg use_mesh)">
+    <origin xyz="-0.01 -0.035 0.0" rpy="${-pi/2} 0 ${-pi/2}"/>
+  </xacro:sensor_d435>
 </robot>

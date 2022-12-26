@@ -2,8 +2,8 @@
 <robot name="turtlebot3_burger" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find turtlebot3_description)/urdf/common_properties.xacro"/>
   <xacro:include filename="$(find turtlebot3_description)/urdf/turtlebot3_burger_puntilt.gazebo.xacro"/>
+	<xacro:include filename="$(find turtlebot3_description)/urdf/dynamixel/_2XL430.urdf.xacro"/>
   <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
-	<xacro:include filename="$(find turtlebot3_description)/urdf/_2XL430.urdf.xacro"/>
 
   <!-- realsense 関連の引数 -->
   <xacro:arg name="use_nominal_extrinsics" default="true"/>

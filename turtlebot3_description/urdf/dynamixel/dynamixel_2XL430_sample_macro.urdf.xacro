@@ -21,8 +21,16 @@
 			<geometry>
 				<cylinder length="0.001" radius="0.01"/>
 			</geometry>
-			<material name="orange"/>
+			<material name="red"/>
 		</visual>
 	</link>
+
+	<gazebo reference="base">
+		<material>Gazebo/Orange</material>
+	</gazebo>
+	
+	<gazebo reference="hone">
+		<material>Gazebo/Red</material>
+	</gazebo>
 
 </robot>

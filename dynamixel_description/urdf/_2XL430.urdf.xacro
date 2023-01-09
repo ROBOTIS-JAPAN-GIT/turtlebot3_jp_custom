@@ -4,13 +4,25 @@
 	<xacro:macro name="servo_2XL430" params="parent child center_parent:=false center_child:=false">
 	   <xacro:include filename="$(find dynamixel_description)/urdf/_2XL430.gazebo.xacro"/>
 
-		<xacro:property name="L_x_yaw" value="${ 0/1000}" />
-		<xacro:property name="L_y_yaw" value="${12/1000}" />
-		<xacro:property name="L_z_yaw" value="${19/1000}" />
-		<xacro:property name="L_x_pitch" value="${ L_z_yaw}" />
-		<xacro:property name="L_y_pitch" value="${-L_y_yaw}" />
-		<xacro:property name="L_z_pitch" value="${ L_x_yaw}" />
 		<xacro:property name="path_to_stl" value="meshes/2XL430-W250-T.stl" />
+		<xacro:property name="L_x_yaw" value="${ 0/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="L_y_yaw" value="${12/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="L_z_yaw" value="${19/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="L_x_pitch" value="${ L_z_yaw}" /> <!-- unit [m] -->
+		<xacro:property name="L_y_pitch" value="${-L_y_yaw}" /> <!-- unit [m] -->
+		<xacro:property name="L_z_pitch" value="${ L_x_yaw}" /> <!-- unit [m] -->
+		<xacro:property name="W_x" value="${36/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="W_y" value="${46.5/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="W_z" value="${W_x}" /> <!-- unit [m] -->
+		<xacro:property name="no_load_speed" value="${61*(2*pi/60)}" /> <!-- unit [rad/sec] --> <!-- converted from [rev/min] -->
+		<xacro:property name="stall_torque"  value="${1.5}" /> <!-- unit [Nm] -->
+		<xacro:property name="mass"  value="${98.2/1000}" /> <!-- unit [kg] --> <!-- converted from [g] -->
+		<xacro:property name="inertia">
+			<inertia ixx="0.11"  ixy="0.00" ixz="0.00" 
+			                     iyy="0.11" iyz="0.00" 
+			                                izz="0.11" />
+		</xacro:property> <!--todo, this is not correct-->
+
 
 		<joint name="2XL430_yaw_joint_" type="fixed">
 			<parent link="${parent}"/>
@@ -29,20 +41,16 @@
 			<parent link="dynx_2XL430_hone_yaw"/>
 			<child link="dynx_2XL430"/>
 			<origin xyz="${L_x_yaw} ${L_y_yaw} ${L_z_yaw}" rpy="${pi} 0 0"/>
-			<!--6.3879[rad/sec]=61[rev/min], 1.5[Nm]-->
 			<axis xyz="0 0 1"/>
 			<dynamics damping="0.1"/>  
-			<limit velocity="6.3879" effort="1.5" /> 
-			<!-- <limit lower="-3.1" upper="3.1" velocity="6.3879" effort="1.5" />  -->
+			<limit velocity="${no_load_speed}" effort="${stall_torque}" /> 
 		</joint>
 
 		<link name="dynx_2XL430">
 			<inertial>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
-				<mass value="${98.2/1000}"/>
-				<inertia ixx="0.1"  ixy="0"   ixz="0" 
-				                    iyy="0.1" iyz="0" 
-										            izz="0.1" /> <!--todo, this is not correct-->
+				<mass value="${mass}"/>
+				<xacro:insert_block name="inertia"/>
 			</inertial>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0" />
@@ -56,7 +64,7 @@
 			<collision>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<box size="0.036 0.0465 0.036"/>
+					<box size="${W_x} ${W_y} ${W_z}"/>
 					<!-- <mesh filename="package://dynamixel_description/${path_to_stl}" /> -->
 				</geometry>
 			</collision>
@@ -66,11 +74,9 @@
 			<parent link="dynx_2XL430"/>
 			<child link="dynx_2XL430_hone_pitch"/>
 			<origin xyz="${L_x_pitch} ${L_y_pitch} ${L_z_pitch}" rpy="0 ${pi/2} 0"/>
-			<!--6.3879[rad/sec]=61[rev/min], 1.5[Nm]-->
 			<axis xyz="0 0 1"/>
 			<dynamics damping="0.1"/>  
-			<limit velocity="6.3879" effort="1.5" /> 
-			<!-- <limit lower="-3.1" upper="3.1" velocity="6.3879" effort="1.5" />  -->
+			<limit velocity="${no_load_speed}" effort="${stall_torque}" /> 
 		</joint>
 
 		<link name="dynx_2XL430_hone_pitch" />

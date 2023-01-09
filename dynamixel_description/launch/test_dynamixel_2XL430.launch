@@ -10,4 +10,15 @@
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_file_address)" required="true" /> 
 
   <param name="robot_description" command="$(find xacro)xacro $(find dynamixel_description)/urdf/test_$(arg model)_servo.urdf.xacro" />
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused"       value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui"          value="true"/>
+    <arg name="headless"     value="false"/>
+    <arg name="debug"        value="false"/>
+  </include>
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model $(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
 </launch>

@@ -4,7 +4,8 @@
 	<xacro:macro name="servo_2XL430" params="parent child center_parent:=false center_child:=false">
 	   <xacro:include filename="$(find dynamixel_description)/urdf/_2XL430.gazebo.xacro"/>
 
-		<xacro:property name="path_to_stl" value="meshes/2XL430-W250-T.stl" />
+		<xacro:property name="path_to_mesh" value="meshes/2XL430-W250-T.stl" />
+		<xacro:property name="visual_origin"> <origin xyz="${0} ${0} ${0}" rpy="${0} ${0} ${0}" /> </xacro:property>
 		<xacro:property name="L_x_yaw" value="${ 0/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
 		<xacro:property name="L_y_yaw" value="${12/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
 		<xacro:property name="L_z_yaw" value="${19/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
@@ -53,9 +54,9 @@
 				<xacro:insert_block name="inertia"/>
 			</inertial>
 			<visual>
-				<origin xyz="0 0 0" rpy="0 0 0" />
+				<xacro:insert_block name="visual_origin"/>
 				<geometry>
-					<mesh filename="package://dynamixel_description/${path_to_stl}" />
+					<mesh filename="package://dynamixel_description/${path_to_mesh}" />
 				</geometry>
 				<material name="gray">
 					<color rgba="0.8 0.8 0.8 0.5"/>
@@ -65,7 +66,7 @@
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
 					<box size="${W_x} ${W_y} ${W_z}"/>
-					<!-- <mesh filename="package://dynamixel_description/${path_to_stl}" /> -->
+					<!-- <mesh filename="package://dynamixel_description/${path_to_mesh}" /> -->
 				</geometry>
 			</collision>
 		</link>

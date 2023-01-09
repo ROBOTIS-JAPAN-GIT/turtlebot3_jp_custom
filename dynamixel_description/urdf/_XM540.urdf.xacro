@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!-- あとでdynamixel descriptionを作ってそこにれる -->
+<robot name=" dynamixel-XM540" xmlns:xacro="http://ros.org/wiki/xacro">\
+	<xacro:macro name="servo_XM540" params="parent child fixed_plane:=bottom center_child:=false">
+	   <xacro:include filename="$(find dynamixel_description)/urdf/_XM540.gazebo.xacro"/>
+
+		<xacro:property name="path_to_mesh" value="meshes/XM540-W150-R.dae" />
+		<xacro:property name="visual_origin"> <origin xyz="${0} ${0.0386} ${0}" rpy="${-pi/2} 0 ${pi}" /> </xacro:property>
+		<xacro:property name="L_x_hone" value="${ 0.0/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="L_y_hone" value="${15.5/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="L_z_hone" value="${24.5/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="W_x" value="${33.5/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="W_y" value="${58.5/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="W_z" value="${44.0/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="no_load_speed" value="${66*(2*pi/60)}" /> <!-- unit [rad/sec] --> <!-- converted from [rev/min] -->
+		<xacro:property name="stall_torque"  value="${8.9}" /> <!-- unit [Nm] -->
+		<xacro:property name="mass"  value="${165/1000}" /> <!-- unit [kg] --> <!-- converted from [g] -->
+		<xacro:property name="inertia"> <!-- unit [kg*m^@] --> <!-- converted from [g*mm^2] -->
+			<inertia ixx="${72456.754/1000000000}"  ixy="${-128.62012/1000000000}" ixz="${-174.27089/1000000000}" 
+			                                        iyy="${ 38622.228/1000000000}" iyz="${-8272.2282/1000000000}" 
+			                                                                       izz="${ 60707.131/1000000000}" /> 
+		</xacro:property>
+
+
+		<joint name="XM540_base_joint_" type="fixed">
+			<parent link="${parent}"/>
+			<child link="dynx_XM540"/>
+			<xacro:if value="${fixed_plane == 'bottom'}">
+				<origin xyz="${0} ${0} ${W_y/2}" rpy="${pi/2} ${0} ${0}"/> <!-- 回転が先 -->
+			</xacro:if>
+			<xacro:if value="${fixed_plane == 'top'}">
+				<origin xyz="${0} ${0} ${-W_y/2}" rpy="${pi/2} ${0} ${0}"/> <!-- 回転が先 -->
+			</xacro:if>
+		</joint>
+
+		<link name="dynx_XM540">
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${mass}"/>
+				<xacro:insert_block name="inertia"/>
+			</inertial>
+			<visual>
+				<xacro:insert_block name="visual_origin"/>
+				<geometry>
+					<mesh filename="package://dynamixel_description/${path_to_mesh}" />
+				</geometry>
+				<material name="gray">
+					<color rgba="0.8 0.8 0.8 0.5"/>
+				</material>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<box size="${W_x} ${W_y} ${W_z}"/>
+					<!-- <mesh filename="package://dynamixel_description/${path_to_mesh}" /> -->
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="${child}_joint" type="fixed">
+			<parent link="dynx_XM540"/>
+			<child link="dynx_XM540_hone"/>
+			<origin xyz="${L_x_hone} ${L_y_hone} ${L_z_hone}" rpy="0 0 0"/>
+			<axis xyz="0 0 1"/>
+			<dynamics damping="0.1"/>  
+			<limit velocity="${no_load_speed}" effort="${stall_torque}" /> 
+		</joint>
+
+		<link name="dynx_XM540_hone" />
+
+		<joint name="XM540_hone_joint_" type="fixed">
+			<parent link="dynx_XM540_hone"/>
+			<child link="${child}"/>
+			<xacro:if value="${center_child}">
+				<origin xyz="0 0 ${-L_z_hone}" rpy="0 0 0"/>
+			</xacro:if>
+			<xacro:unless value="${center_child}">
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+			</xacro:unless>
+		</joint>
+
+	</xacro:macro>
+
+</robot>

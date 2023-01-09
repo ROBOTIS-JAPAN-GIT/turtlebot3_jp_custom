@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!-- あとでdynamixel descriptionを作ってそこにれる -->
+<robot name=" dynamixel-2XC430" xmlns:xacro="http://ros.org/wiki/xacro">\
+	<xacro:macro name="servo_2XC430" params="parent child center_parent:=false center_child:=false">
+	   <xacro:include filename="$(find dynamixel_description)/urdf/_2XC430.gazebo.xacro"/>
+
+		<xacro:property name="path_to_mesh" value="meshes/2XC430-W250-T.stl" />
+		<xacro:property name="visual_origin"> <origin xyz="${0} ${0} ${0}" rpy="${0} ${0} ${0}" /> </xacro:property>
+		<xacro:property name="L_x_yaw" value="${ 0/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="L_y_yaw" value="${12/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="L_z_yaw" value="${19/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="L_x_pitch" value="${ L_z_yaw}" /> <!-- unit [m] -->
+		<xacro:property name="L_y_pitch" value="${-L_y_yaw}" /> <!-- unit [m] -->
+		<xacro:property name="L_z_pitch" value="${ L_x_yaw}" /> <!-- unit [m] -->
+		<xacro:property name="W_x" value="${36/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="W_y" value="${46.5/1000}" /> <!-- unit [m] --> <!-- converted from [mm] -->
+		<xacro:property name="W_z" value="${W_x}" /> <!-- unit [m] -->
+		<xacro:property name="no_load_speed" value="${64*(2*pi/60)}" /> <!-- unit [rad/sec] --> <!-- converted from [rev/min] -->
+		<xacro:property name="stall_torque"  value="${1.8}" /> <!-- unit [Nm] -->
+		<xacro:property name="mass"  value="${102/1000}" /> <!-- unit [kg] --> <!-- converted from [g] -->
+		<xacro:property name="inertia">
+			<inertia ixx="0.11"  ixy="0.00" ixz="0.00" 
+			                     iyy="0.11" iyz="0.00" 
+			                                izz="0.11" />
+		</xacro:property> <!--todo, this is not correct-->
+
+
+		<joint name="2XC430_yaw_joint_" type="fixed">
+			<parent link="${parent}"/>
+			<child link="dynx_2XC430_hone_yaw"/>
+			<xacro:if value="${center_parent}">
+				<origin xyz="0 0 ${-L_z_yaw}" rpy="0 0 0"/>
+			</xacro:if>
+			<xacro:unless value="${center_parent}">
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+			</xacro:unless>
+		</joint>
+
+		<link name="dynx_2XC430_hone_yaw" />
+
+		<joint name="${parent}_joint" type="fixed">
+			<parent link="dynx_2XC430_hone_yaw"/>
+			<child link="dynx_2XC430"/>
+			<origin xyz="${L_x_yaw} ${L_y_yaw} ${L_z_yaw}" rpy="${pi} 0 0"/>
+			<!--6.3879[rad/sec]=61[rev/min], 1.5[Nm]-->
+			<axis xyz="0 0 1"/>
+			<dynamics damping="0.1"/>  
+			<limit velocity="${no_load_speed}" effort="${stall_torque}" /> 
+		</joint>
+
+		<link name="dynx_2XC430">
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${mass}"/>
+				<xacro:insert_block name="inertia"/>
+			</inertial>
+			<visual>
+				<xacro:insert_block name="visual_origin"/>
+				<geometry>
+					<mesh filename="package://dynamixel_description/${path_to_mesh}" />
+				</geometry>
+				<material name="gray">
+					<color rgba="0.8 0.8 0.8 0.5"/>
+				</material>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<box size="${W_x} ${W_y} ${W_z}"/>
+					<!-- <mesh filename="package://dynamixel_description/${path_to_mesh}" /> -->
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="${child}_joint" type="fixed">
+			<parent link="dynx_2XC430"/>
+			<child link="dynx_2XC430_hone_pitch"/>
+			<origin xyz="${L_x_pitch} ${L_y_pitch} ${L_z_pitch}" rpy="0 ${pi/2} 0"/>
+			<!--6.3879[rad/sec]=61-->
+			<axis xyz="0 0 1"/>
+			<dynamics damping="0.1"/>  
+			<limit velocity="${no_load_speed}" effort="${stall_torque}" /> 
+		</joint>
+
+		<link name="dynx_2XC430_hone_pitch" />
+
+		<joint name="2XC430_pitch_joint_" type="fixed">
+			<parent link="dynx_2XC430_hone_pitch"/>
+			<child link="${child}"/>
+			<xacro:if value="${center_child}">
+				<origin xyz="0 0 ${-L_x_pitch}" rpy="0 0 0"/>
+			</xacro:if>
+			<xacro:unless value="${center_child}">
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+			</xacro:unless>
+		</joint>
+
+	</xacro:macro>
+
+</robot>

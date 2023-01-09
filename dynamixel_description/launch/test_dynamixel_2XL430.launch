@@ -1,0 +1,13 @@
+<launch>
+  <arg name="model" default="2XL430"/>
+  <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0"/>
+
+  <arg name="rviz_file_address" default="$(find dynamixel_description)/rviz/display.rviz" /> 
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_file_address)" required="true" /> 
+
+  <param name="robot_description" command="$(find xacro)xacro $(find dynamixel_description)/urdf/test_$(arg model)_servo.urdf.xacro" />
+</launch>

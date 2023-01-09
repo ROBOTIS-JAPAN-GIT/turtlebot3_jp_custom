@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!-- あとでdynamixel descriptionを作ってそこにれる -->
+<robot name=" dynamixel-2XL430" xmlns:xacro="http://ros.org/wiki/xacro">\
+	<xacro:macro name="servo_2XL430" params="parent child center_parent:=false center_child:=false">
+	   <xacro:include filename="$(find dynamixel_description)/urdf/_2XL430.gazebo.xacro"/>
+
+		<xacro:property name="L_x_yaw" value="${ 0/1000}" />
+		<xacro:property name="L_y_yaw" value="${12/1000}" />
+		<xacro:property name="L_z_yaw" value="${19/1000}" />
+		<xacro:property name="L_x_pitch" value="${ L_z_yaw}" />
+		<xacro:property name="L_y_pitch" value="${-L_y_yaw}" />
+		<xacro:property name="L_z_pitch" value="${ L_x_yaw}" />
+		<xacro:property name="path_to_stl" value="meshes/2XL430-W250-T.stl" />
+
+		<joint name="2XL430_yaw_joint_" type="fixed">
+			<parent link="${parent}"/>
+			<child link="dynx_2XL430_hone_yaw"/>
+			<xacro:if value="${center_parent}">
+				<origin xyz="0 0 ${-L_z_yaw}" rpy="0 0 0"/>
+			</xacro:if>
+			<xacro:unless value="${center_parent}">
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+			</xacro:unless>
+		</joint>
+
+		<link name="dynx_2XL430_hone_yaw" />
+
+		<joint name="${parent}_joint" type="fixed">
+			<parent link="dynx_2XL430_hone_yaw"/>
+			<child link="dynx_2XL430"/>
+			<origin xyz="${L_x_yaw} ${L_y_yaw} ${L_z_yaw}" rpy="${pi} 0 0"/>
+			<!--6.3879[rad/sec]=61[rev/min], 1.5[Nm]-->
+			<axis xyz="0 0 1"/>
+			<dynamics damping="0.1"/>  
+			<limit velocity="6.3879" effort="1.5" /> 
+			<!-- <limit lower="-3.1" upper="3.1" velocity="6.3879" effort="1.5" />  -->
+		</joint>
+
+		<link name="dynx_2XL430">
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${98.2/1000}"/>
+				<inertia ixx="0.1"  ixy="0"   ixz="0" 
+				                    iyy="0.1" iyz="0" 
+										            izz="0.1" /> <!--todo, this is not correct-->
+			</inertial>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<mesh filename="package://dynamixel_description/${path_to_stl}" />
+				</geometry>
+				<material name="gray">
+					<color rgba="0.8 0.8 0.8 0.5"/>
+				</material>
+			</visual>
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<geometry>
+					<box size="0.036 0.0465 0.036"/>
+					<!-- <mesh filename="package://dynamixel_description/${path_to_stl}" /> -->
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="${child}_joint" type="fixed">
+			<parent link="dynx_2XL430"/>
+			<child link="dynx_2XL430_hone_pitch"/>
+			<origin xyz="${L_x_pitch} ${L_y_pitch} ${L_z_pitch}" rpy="0 ${pi/2} 0"/>
+			<!--6.3879[rad/sec]=61[rev/min], 1.5[Nm]-->
+			<axis xyz="0 0 1"/>
+			<dynamics damping="0.1"/>  
+			<limit velocity="6.3879" effort="1.5" /> 
+			<!-- <limit lower="-3.1" upper="3.1" velocity="6.3879" effort="1.5" />  -->
+		</joint>
+
+		<link name="dynx_2XL430_hone_pitch" />
+
+		<joint name="2XL430_pitch_joint_" type="fixed">
+			<parent link="dynx_2XL430_hone_pitch"/>
+			<child link="${child}"/>
+			<xacro:if value="${center_child}">
+				<origin xyz="0 0 ${-L_x_pitch}" rpy="0 0 0"/>
+			</xacro:if>
+			<xacro:unless value="${center_child}">
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+			</xacro:unless>
+		</joint>
+
+	</xacro:macro>
+
+</robot>

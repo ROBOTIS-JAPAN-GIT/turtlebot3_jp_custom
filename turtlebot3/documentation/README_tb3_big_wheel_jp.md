@@ -247,7 +247,7 @@ $ ros2 launch turtlebot3_gazebo empty_world.launch.py
 > **Note**
 > `empty_world`以外にも、`house`, `simulation`, `stage_1`などという環境もあります。そして、ROBOTIS日本支店カスタムのワールドもあります。現時点では、`turtlebot3_jp_world_empty`, `turtlebot3_jp_world_static`, `turtlebot3_jp_world_dynamic`, `turtlebot3_jp_world_corridor_pedestrian`の4種類のワールドを用意しています。
 
-
+（イメージ図）
 | モデル名 | 画像 |
 |:---:|:---:|
 | turtlebot3_jp_world_static | ![TB3 static](/turtlebot3/documentation/gif/turtlebot3_jp_world_static.png) | 

@@ -28,53 +28,97 @@
 
 ## Setup Manual（Quick Start Guide）
 ### 1. Environment Setup
-Few configurations from TurtleBot3 are required in order to use and test the new Big Wheel model from the TurtleBot3 Friends family. To do so, please follow the official TurtleBot3 e-Manual 「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」. However, take note of the following changes that are pointed out.
+Some modifications from the original TurtleBot3 are required in order to use and test the new Big Wheel model from the TurtleBot3 Friends family. To do so, please follow the official TurtleBot3 e-Manual 「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」. Please, take note of the following changes that are pointed out.
 
 - About [1.1. PC Setup](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#pc-setup)
-Big Wheel model uses whether Raspberry Pi 4B or NUC11 as SBC. Right now, it is only supported in ROS Noetic enviroment. Please, select the 「Noetic」 branch from the 「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」.
+Big Wheel model uses whether Raspberry Pi 4B or NUC11 as SBC. Right now, ROS Humble
+is also in process of development. Please, select the 「Foxy」 branch from the 「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」, the Humble version is not yet supported officially.
 
+
+- Changes in [1.1.2. Install ROS 2 on Remote PC](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#install-ros-2-on-remote-pc)
+
+Prepare your environment installing ROS Humble/
+
+```code
+$ wget https://raw.githubusercontent.com/ROBOTIS-JAPAN-GIT/robotis_tools_jp/master/install_ros2_humble.sh
+$ sudo chmod 755 ./install_ros2_humble.sh
+$ bash ./install_ros2_humble.sh
+```
+
+- Changes in [1.1.3. Install Dependent ROS Packages](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#install-dependent-ros-2-packages)
+
+Now install some required packages.
+
+```code
+$ sudo apt-get install ros-humble-gazebo-*
+
+$ sudo apt install ros-humble-cartographer
+$ sudo apt install ros-humble-cartographer-ros
+
+$ sudo apt install ros-humble-navigation2
+$ sudo apt install ros-humble-nav2-bringup
+```
 
 - Changes in [1.1.4. Install TurtleBot3 Packages](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#install-turtlebot3-packages)
 
-Once ROS Noetic is already installed, we will install some required ROS packages from the ROBOTIS Japan official GitHub site. Please, introduce the following commands in your terminal.
+Once ROS Humble is already installed, we will install some required ROS packages from the ROBOTIS Japan official GitHub site for TurtleBot3. Please, introduce the following commands in your terminal.
 
 ```code
-$ sudo apt remove ros-noetic-dynamixel-sdk
-$ sudo apt remove ros-noetic-turtlebot3-msgs
-$ sudo apt remove ros-noetic-turtlebot3
-$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws/src/
-$ git clone -b noetic-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
-$ git clone -b noetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
-$ git clone -b noetic-jp-devel https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_jp_custom
-$ cd ~/catkin_ws && catkin_make
-$ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+$ sudo apt remove ros-humble-dynamixel-sdk
+$ sudo apt remove ros-humble-turtlebot3-msgs
+$ sudo apt remove ros-humble-turtlebot3
+# If a warning message appears saying that there is no such packages, you can ignore it
+
+$ mkdir -p ~/turtlebot3_ws/src
+$ cd ~/turtlebot3_ws/src/
+$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+$ git clone -b humble-jp-devel https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_jp_custom
+$ cd ~/turtlebot3_ws
+$ colcon build --symlink-install
+$ echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
+$ source ~/.bashrc
+```
+
+- Changes in [1.1.5. Environment Configuration](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#environment-configuration)
+
+Let's setup the ROS environemnt.
+```code
+$ echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
+$ source ~/.bashrc
 ```
 
 - About [3.2. SBC Setup](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/#sbc-setup)
 
 In the new Big Wheel model, NUC11 is used as main processing computer, instead the Raspbery Pi 4B that has being used in `Buger` or `Waffle Pi` models. We will omit the usual SBC setup setup. Please follow the next steps in your NUC.
 
+> **Warning**
+> We did not conduct yet any experiments to confirm the correct movement in the actual robot. Please, follow the next instructions in your own responsability. Thank you!
+
 > **Note**
 > In the case you want to still use Raspberry Pi 4B, please follow those steps from the TurtleBot3 e-Manual.
 
 1. Install Ubuntu 20.04.
 
-2. Install ROS Noetic.
+2. Install ROS Humble.
 
 3. Install TurtleBot3 required packages as it follows
 
 ```code
-$ sudo apt remove ros-noetic-dynamixel-sdk
-$ sudo apt remove ros-noetic-turtlebot3-msgs
-$ sudo apt remove ros-noetic-turtlebot3
-$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws/src/
-$ git clone -b noetic-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
-$ git clone -b noetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
-$ git clone -b noetic-jp-devel https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_jp_custom
-$ cd ~/catkin_ws && catkin_make
-$ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+$ sudo apt remove ros-humble-dynamixel-sdk
+$ sudo apt remove ros-humble-turtlebot3-msgs
+$ sudo apt remove ros-humble-turtlebot3
+# If a warning message appears saying that there is no such packages, you can ignore it
+
+$ mkdir -p ~/turtlebot3_ws/src
+$ cd ~/turtlebot3_ws/src/
+$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+$ git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+$ git clone -b humble-jp-devel https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_jp_custom
+$ cd ~/turtlebot3_ws
+$ colcon build --symlink-install
+$ echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
+$ source ~/.bashrc
 ```
 
 - Changes in [3.3. OpenCR Setup](https://emanual.robotis.com/docs/en/platform/turtlebot3/opencr_setup)
@@ -88,11 +132,11 @@ The setup of the OpenCR is done through the NUC.
 3. Select ```big_wheel_noetic``` as the `OPENCR_MODEL`.
 ```code
 $ export OPENCR_PORT=/dev/ttyACM0
-$ export OPENCR_MODEL=big_wheel_noetic
+$ export OPENCR_MODEL=big_wheel_humble
 $ rm -rf ./opencr_update.tar.bz2
 ```
 
-4. Download the firmware and uncompress it.
+4. Download the firmware and uncompress it. (ToDo)
 ```code
 $ wget https://github.com/ROBOTIS-JAPAN-GIT/OpenCR_jp_custom/releases/download/v1.0.0/opencr_update_jp_custom.tar.bz2
 $ tar -xvf opencr_update_jp_custom.tar.bz2 
@@ -104,73 +148,10 @@ $ cd ./opencr_update
 $ ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
 ```
 
-6. If the firmware for the TurtleBot3 Big Wheel has been successfully burnt into the OpenCR, the following message will appear.
+6. If the firmware for the TurtleBot3 Big Wheel has been successfully burnt into the OpenCR, the following message will appear. (This is just an image)
 ![TB3 Big Wheel OpenCR Success Output](/turtlebot3/documentation/tb3_big_wheel_opencr.png)
 
-
-### 2. Network Environment
-In usual TurtleBot3 models, Raspberri Pi has being used to distribute the main processing to the `master pc` which counts with higher processing performance. In the case of the new Big Wheel model, NUC is set up as the `master pc`. To connect with it, we will use ssh through a remote PC, and visualize the NUC-processed topic in Rviz. Please, follow the next steps.
-
-> **Note**
-> In the case you want to use Raspberry Pi 4B, please follow those steps from the TurtleBot3 e-Manual.
-
-- **In the NUC（master PC）**
-1. Check the IP address the NUC is connected to.
-
-```code
-$ ifconfig
-```
-
-Inside the 「wlp2s0」>「inet addr」, you will find an ip similar to `192.168.X.XXX`. Please, ntake a note of it.
-> **Note**
-> The 「X」 from the ip `192.168.X.XXX` may change depending on your network.
-2. Write the ROS IP inside your 「~/.bashrc」 file.
-
-```code ~/.bashrc
-$ nano ~/.bashrc
-```
-
-Move until the last line of the document and write down the following lines. (Do not forget to change the 「X」 depending on your IP)
-
-```
-export ROS_MASTER_URI=http://192.168.X.XXX:11311
-export ROS_HOSTNAME=192.168.X.XXX
-```
-
-3. Once, it has been already added to the file, press `Ctrl+s` to save and then, `Ctrl+x` to go back.
-
-4. Lastly, apply the changes of ROS IP to take them into effect.
-
-```code
-$ source ~/.bashrc
-```
-
-- **In the Remote PC**
-
-1. Do not forget the IP address of your NUC. (192.168.X.XXX)
-1. Check the IP address of your `remote PC` using the `ifconfig` command and take note of it. (192.168.X.YYY)
-1. Write the ROS IP inside your 「~/.bashrc」 file.
-
-```code ~/.bashrc
-$ nano ~/.bashrc
-```
-
-Move until the last line of the document and write down the following lines. (Do not forget to change the 「X」 and the 「Y」 depending on your IP)。
-
-```
-export ROS_MASTER_URI=http://192.168.X.XXX:11311
-export ROS_HOSTNAME=192.168.X.YYY
-```
-
-4. Once, it has been already added to the file, press `Ctrl+s` to save and then, `Ctrl+x` to go back.
-
-5. Lastly, apply the changes of ROS IP to take them into effect.
-
-```code
-$ source ~/.bashrc
-```
-
-### 3. Additional packages setup
+### 4. Additional packages setup
 In the new TurtleBot3 Big Wheel model, 「Realsense D435」 is used as defaut camera and 「LDS-series」 as default LiDAR sensor. Here, we will explain about its setup.
 
 > **Warning**
@@ -183,41 +164,33 @@ First of all, please install the requiered packages.
 
 ```code
 $ sudo apt-get install ros-$ROS_DISTRO-realsense2-camera
-$ cd ~/catkin_ws/src
-$ git clone https://github.com/ROBOTIS-JAPAN-GIT/realsense-ros_jp_custom
-$ cd ~/catkin_ws
-$ catkin_make
+$ cd ~/turtlebot3_ws/src
+$ git clone -b humble-jp-devel https://github.com/ROBOTIS-JAPAN-GIT/realsense-ros_jp_custom
+$ cd ~/turtlebot3_ws
+$ colcon build --symlink-install
 ```
 
 > **Note**
 > If you want to know more in detail about the [realsense-ros](https://github.com/IntelRealSense/realsense-ros), please refer to the official GitHub repository.
 
-Now, in order to use the Realsense D435 in the Gazebo simulation as well, download the next repository.
-
-```code
-$ cd ~/catkin_ws/src
-$ git clone https://github.com/pal-robotics/realsense_gazebo_plugin
-$ cd ~/catkin_ws
-$ catkin_make
-```
-
 
 1. **LiDAR setup**
 
 In the case of TurtleBot3 Big Wheel as default, we use the same sensor provided in the original TurtleBot3. You can decide t use whether the LDS-01 or the LDS-02. In that case, please refere to the TurtleBot3 e-Manual to complete the setup
-
+[3.2.8. NEW LDS-02 Configuration](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/)
 
 ## Simulation Environment（Gazebo）
-TurtleBot3 Pizza counts with Gazebo support, a simulation environment which takes into account the physics of its virtual environmet. By just dowloading the following package, you will be able to use it with no problem.
+TurtleBot3 Big Wheel counts with Gazebo support, a simulation environment which takes into account the physics of its virtual environmet. By just dowloading the following package, you will be able to use it with no problem.
 
 ```code
-$ cd ~/catkin_ws/src/
-$ git clone -b noetic-devel https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_simulations_jp_custom
+$ cd ~/turtlebot3_ws/src/
+$ git clone -b humble-jp-devel https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_simulations_jp_custom
 $ git clone https://github.com/robotics-upo/lightsfm
 $ cd lightsfm
 $ make
 $ sudo make install
-$ cd ~/catkin_ws && catkin_make
+$ cd ~/turtlebot3_ws
+$ colcon build --symlink-install
 ```
 
 
@@ -226,25 +199,33 @@ $ cd ~/catkin_ws && catkin_make
 ### Real robot
 Congratulations! You have been able to setup your developing environment. Now, let's move the TurtleBot3 Big Wheel. To do so, please followg the next steps.
 
-> **Note**
-> When connecting to the NUC thorugh ssh, do not forget to use the NUC IP address (192.168.X.XXX).
+> **Warning**
+> We did not conduct yet any experiments to confirm the correct movement in the actual robot. Please, follow the next instructions in your own responsability. Thank you!
+
 0. Select the TurtleBot3 model.
 ```code 
 $ export TURTLEBOT3_MODEL=big_wheel
 ```
+
+You can also add it to the last of the [~/.bashrc] file.
+```code 
+export TURTLEBOT3_MODEL=big_wheel
+```
+
 > **Note**
 > Everytime you open a new terminal, it is required to select the TurtleBot3 model, you would use. A part from `big_wheel`, you can slo try other models such as `burger`, `waffle_pi`, `pizza`.
-1. In the **NUC**, run roscore.
+
+1. Connect to  **NUC**.
 ```code
-$ roscore
+$ ssh ubuntu@{IP_ADDRESS_OF_RASPBERRY_PI}
 ```
 2. In the **NUC**, launch the Turtlebot3 Big Wheel.
 ```code
-$ roslaunch turtlebot3_bringup turtlebot3_robot.launch
+$ ros2 launch turtlebot3_bringup robot.launch.py
 ```
 3. If required, in the **remote PC** launch the TeleOperation.
 ```code
-$ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+$ ros2 run turtlebot3_teleop teleop_keyboard
 ```
 
 - **SLAM (mapping) + Navigation**
@@ -258,13 +239,13 @@ In other to use the Gazebo simulation environment, please refer to the official 
 
 ```code 
 $ export TURTLEBOT3_MODEL=big_wheel
-$ roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+$ ros2 launch turtlebot3_gazebo empty_world.launch.py
 ```
 
 > **Note**
 > A part from `empty_world`, you can also try different environments such as `house`, `simulation`, `stage_1`. Moreover, as ROBOTIS Japan, we have prepared a few new environments. Right now, we have `turtlebot3_jp_world_empty`, `turtlebot3_jp_world_static`, `turtlebot3_jp_world_dynamic`, `turtlebot3_jp_world_corridor_pedestrian` 4 different worlds ready to use.
 
-
+(This is just an image)
 | World Name | Image |
 |:---:|:---:|
 | turtlebot3_jp_world_static | ![TB3 static](/turtlebot3/documentation/gif/turtlebot3_jp_world_static.png) | 

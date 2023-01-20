@@ -6,7 +6,7 @@
   <xacro:arg name="use_mesh" default="true" />
   <xacro:arg name="publish_pointcloud" default="false" />
 
-  <xacro:include filename="$(find turtlebot3_description)/urdf/common_properties.urdf"/>
+  <xacro:include filename="$(find turtlebot3_description)/urdf/common_properties.urdf.xacro"/>
   <xacro:include filename="$(find turtlebot3_description)/urdf/turtlebot3_big_wheel.gazebo.xacro"/>
   <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
 
@@ -23,8 +23,8 @@
     <visual>
       <origin xyz="-0.064 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="$(find turtlebot3_description)/meshes/bases/waffle_pi_base.dae" scale="0.001 0.001 0.001"/>
-        <!-- <mesh filename="$(find turtlebot3_description)/meshes/bases/big_wheel_base.dae" scale="0.001 0.001 0.001"/> -->
+        <mesh filename="file://$(find turtlebot3_description)/meshes/bases/waffle_pi_base.dae" scale="0.001 0.001 0.001"/>
+        <!-- <mesh filename="file://$(find turtlebot3_description)/meshes/bases/big_wheel_base.dae" scale="0.001 0.001 0.001"/> -->
       </geometry>
       <material name="light_black"/>
     </visual>
@@ -57,9 +57,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="$(find turtlebot3_description)/meshes/wheels/big_wheel_tire.dae" scale="1.00 1.00 1.00"/>
+        <mesh filename="file://$(find turtlebot3_description)/meshes/wheels/big_wheel_tire.dae" scale="1.00 1.00 1.00"/>
       </geometry>
-      <material name="dark"/>
+      <material name="orange"/>
     </visual>
 
     <collision>
@@ -90,9 +90,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="$(find turtlebot3_description)/meshes/wheels/big_wheel_tire.dae" scale="1.00 1.00 1.00"/>
+        <mesh filename="file://$(find turtlebot3_description)/meshes/wheels/big_wheel_tire.dae" scale="1.00 1.00 1.00"/>
       </geometry>
-      <material name="dark"/>
+      <material name="orange"/>
     </visual>
 
     <collision>
@@ -122,13 +122,13 @@
     <visual>
       <origin xyz="0 0.00175 0" rpy="1.57 0 0"/>
       <geometry>
-        <mesh filename="$(find turtlebot3_description)/meshes/joints/big_wheel_caster_joint.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find turtlebot3_description)/meshes/joints/big_wheel_caster_joint.dae" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dark"/>
     </visual>
 
     <collision>
-      <origin xyz="0 ${0.039/2} 0" rpy="1.57 0 0"/>
+      <origin xyz="0 0.0185 0" rpy="1.57 0 0"/>
       <geometry>
         <box size="0.030 0.009 0.039"/>
       </geometry>
@@ -154,13 +154,13 @@
     <visual>
       <origin xyz="0 0.00175 0" rpy="1.57 0 0"/>
       <geometry>
-        <mesh filename="$(find turtlebot3_description)/meshes/joints/big_wheel_caster_joint.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find turtlebot3_description)/meshes/joints/big_wheel_caster_joint.dae" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dark"/>
     </visual>
 
     <collision>
-      <origin xyz="0 ${0.039/2} 0" rpy="1.57 0 0"/>
+      <origin xyz="0 0.0185 0" rpy="1.57 0 0"/>
       <geometry>
         <box size="0.030 0.009 0.039"/>
       </geometry>
@@ -195,7 +195,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="$(find turtlebot3_description)/meshes/sensors/lds.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find turtlebot3_description)/meshes/sensors/lds.stl" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="dark"/>
     </visual>
@@ -227,7 +227,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 1.57"/>
       <geometry>
-        <mesh filename="$(find turtlebot3_description)/meshes/joints/d435_base_camera.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="file://$(find turtlebot3_description)/meshes/joints/d435_base_camera.dae" scale="0.001 0.001 0.001"/>
       </geometry>
       <material name="light_black"/>
     </visual> -->

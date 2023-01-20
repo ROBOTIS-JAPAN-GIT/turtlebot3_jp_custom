@@ -30,7 +30,7 @@ Turtlebot3の新FriendsモデルのBig Wheelを利用するには、まずTurtle
 
 - [1.1. PC Setup](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#pc-setup)について
 
-Big WheelモデルではSBCとして、Raspberry Pi 4BもしくはNUC11を使います。現時点で、ROS Noeticに対応していますので、「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」の「Foxy」ブランチを選択してください。
+Big WheelモデルではSBCとして、Raspberry Pi 4BもしくはNUC11を使います。現時点で、ROS Humbleへの対応を行っていますのが、まず「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」の「Foxy」ブランチを選択してください。
 
 > **Note**
 > 公式的に、「Humble」のバージョンが公開されていませんが、参考までお願いします。

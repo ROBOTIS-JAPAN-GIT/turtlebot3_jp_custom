@@ -2,6 +2,8 @@
 <robot name="turtlebot3_burger_sim" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:arg name="laser_visual" default="false"/>
   <xacro:arg name="imu_visual"   default="false"/>
+  <xacro:arg name="realsese_color_visual"   default="false"/>
+  <xacro:arg name="realsese_depth_visual"   default="true"/>
 
   <gazebo reference="base_link">
     <material>Gazebo/DarkGrey</material>
@@ -39,14 +41,6 @@
     <material>Gazebo/FlatBlack</material>
   </gazebo>
 
-  <gazebo reference="imu_link">
-    <sensor type="imu" name="imu">
-      <always_on>true</always_on>
-      <visualize>$(arg imu_visual)</visualize>
-    </sensor>
-    <material>Gazebo/FlatBlack</material>
-  </gazebo>
-
   <gazebo>
     <plugin name="turtlebot3_burger_controller" filename="libgazebo_ros_diff_drive.so">
       <commandTopic>cmd_vel</commandTopic>
@@ -70,6 +64,13 @@
     </plugin>
   </gazebo>
 
+  <gazebo reference="imu_link">
+    <sensor type="imu" name="imu">
+      <always_on>true</always_on>
+      <visualize>$(arg imu_visual)</visualize>
+    </sensor>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
   <gazebo>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
       <alwaysOn>true</alwaysOn>
@@ -99,6 +100,7 @@
     </plugin>
   </gazebo>
 
+	<!-- LiDAR -->
   <gazebo reference="base_scan">
     <material>Gazebo/FlatBlack</material>
     <sensor type="ray" name="lds_lfcd_sensor">
@@ -132,11 +134,90 @@
     </sensor>
   </gazebo>
 
-  <!-- <gazebo>
-    <plugin name="control" filename="libgazebo_ros_control.so"/>
-    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-      <jointName>base_puntilt_joint, base_realsense_joint</jointName>
-    </plugin>
-  </gazebo> -->
+	<!-- realsense -->
+	<gazebo reference="camera_color_frame">
+      <sensor type="camera" name="realsense_color">
+			<always_on>true</always_on>
+	      <visualize>$(arg realsese_color_visual)</visualize>
+        <update_rate>30.0</update_rate>
+        <camera name="realsense">
+          <pose>0 0 0 0 ${radians(-90)} ${radians(90)}</pose>
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>600</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30.0</updateRate>
+          <cameraName>		tb3_puntilt/realsense/color</cameraName>
+          <imageTopicName>	image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera_color_frame</frameName>
+          <hackBaseline>0.0</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+
+	<gazebo reference="camera_depth_frame">
+		<sensor name="depth_camera" type="depth">
+			<always_on>true</always_on>
+			<update_rate>20</update_rate>
+	      <visualize>$(arg realsese_depth_visual)</visualize>
+			<camera>
+				<horizontal_fov>1.2</horizontal_fov>
+				<image>
+				<format>R8G8B8</format>
+				<width>80</width>
+				<height>60</height>
+				</image>
+				<clip>
+				<near>0.02</near>
+				<far>300</far>
+				</clip>
+			</camera>
+			<plugin filename="libgazebo_ros_depth_camera.so" name="depth_camera_controller">
+          	<alwaysOn>true</alwaysOn>
+				<updateRate>10.0</updateRate>
+				<cameraName>tb3_puntilt/realsense/depth</cameraName>
+				<imageTopicName>color/image_raw</imageTopicName>
+				<cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
+				<pointCloudTopicName>point</pointCloudTopicName>
+				<depthImageTopicName>depth/image_raw</depthImageTopicName>
+				<depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+				<pointCloudCutoff>0.4</pointCloudCutoff>
+				<frameName>camera_depth_frame</frameName>
+				<CxPrime>0.0</CxPrime>
+				<Cx>0.0</Cx>
+				<Cy>0.0</Cy>
+				<focalLength>0.0</focalLength> <!-- use computed_focal_length -->
+				<hackBaseline>0.12</hackBaseline> <!-- use for P[3] -->
+				<distortionK1>0.05</distortionK1>
+				<distortionK2>-0.05</distortionK2>
+				<distortionK3>0.0</distortionK3>
+				<distortionT1>0.0</distortionT1>
+				<distortionT2>0.0</distortionT2>
+			</plugin>
+		</sensor>
+    </gazebo>
+
+
 
 </robot>

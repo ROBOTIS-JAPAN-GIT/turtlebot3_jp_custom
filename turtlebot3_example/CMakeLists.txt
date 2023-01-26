@@ -84,6 +84,7 @@ catkin_install_python(PROGRAMS
   nodes/turtlebot3_sonar
   nodes/turtlebot3_illumination
   nodes/turtlebot3_marker_server
+  nodes/turtlebot3_burger_puntilt_demo
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

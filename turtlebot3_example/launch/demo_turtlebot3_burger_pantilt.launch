@@ -1,0 +1,48 @@
+<launch>
+	<arg name="model" default="burger"/>
+	<arg name="lds_model" default="LDS-02"/>
+	<!-- <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi, pizza, big_wheel]"/>
+  	<arg name="lds_model" default="$(env LDS_MODEL)" doc="LDS MODEL [LDS-01, LDS-02]"/> -->
+	<arg name="x_pos" default="0.0"/>
+	<arg name="y_pos" default="0.0"/>
+	<arg name="z_pos" default="0.0"/>
+
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_jp_world_static.world"/>
+		<arg name="paused" value="false"/>
+		<arg name="use_sim_time" value="true"/>
+		<arg name="gui" value="true"/>
+		<arg name="headless" value="false"/>
+		<arg name="debug" value="false"/>
+	</include>  
+ 
+	<param name="robot_description" command="$(find xacro)xacro $(find turtlebot3_description)/urdf/turtlebot3_$(arg model)_puntilt.urdf.xacro --inorder" />
+
+	<node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+	<!-- パンチルトを動かすためのノードを起動 -->
+	<!-- ここはpuntilt機構に特有なので config_{model}_pantilt.yml みたいな形にして外に出すべきかも -->
+   <rosparam>
+    puntilt_controller:      
+       type: position_controllers/JointTrajectoryController
+       joints: 
+         - base_puntilt_joint
+         - base_realsense_joint
+   </rosparam>
+   <node name = "controller_spawner" pkg = "controller_manager" type = "spawner" args = "puntilt_controller"/>
+
+	<!-- 点群のTFをURDFでやる方法がわからないので，一旦． -->
+
+	<!-- 確認用の rviz -->
+	<include file="$(find turtlebot3_description)/launch/display_robot_in_rviz.launch" />
+
+	<!-- Slam用のノードを起動-->
+	<!-- <include file="$(find turtlebot3_slam)/launch/turtlebot3_gmapping.launch">
+		<arg name="model" value="$(arg model)" />
+		<arg name="lds_model" value="$(arg lds_model)" />
+	</include> -->
+
+	<!-- demo用の動作コマンドをpubするノード -->
+	<node pkg="turtlebot3_example" type="turtlebot3_burger_puntilt_demo" name="turtlebot3_burger_puntilt_demo" output="screen">
+	</node>
+</launch>

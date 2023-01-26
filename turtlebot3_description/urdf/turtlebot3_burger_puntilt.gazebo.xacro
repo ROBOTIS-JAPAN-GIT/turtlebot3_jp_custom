@@ -141,7 +141,7 @@
 	      <visualize>$(arg realsese_color_visual)</visualize>
         <update_rate>30.0</update_rate>
         <camera name="realsense">
-          <pose>0 0 0 0 ${radians(-90)} ${radians(90)}</pose>
+          <pose>0 0 0 0 ${radians(0)} ${radians(0)}</pose>
           <horizontal_fov>1.3962634</horizontal_fov>
           <image>
             <width>800</width>
@@ -180,9 +180,11 @@
 		<sensor name="depth_camera" type="depth">
 			<always_on>true</always_on>
 			<update_rate>20</update_rate>
+			<origin xyz="0 0 0" rpy="${0} ${0} ${0}"/>
 	      <visualize>$(arg realsese_depth_visual)</visualize>
 			<camera>
 				<horizontal_fov>1.2</horizontal_fov>
+	          <pose>0 0 0 ${radians(0)} ${radians(0)} ${radians(0)}</pose>
 				<image>
 				<format>R8G8B8</format>
 				<width>80</width>
@@ -203,7 +205,7 @@
 				<depthImageTopicName>depth/image_raw</depthImageTopicName>
 				<depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
 				<pointCloudCutoff>0.4</pointCloudCutoff>
-				<frameName>camera_depth_frame</frameName>
+				<frameName>camera_depth_optical_frame</frameName>
 				<CxPrime>0.0</CxPrime>
 				<Cx>0.0</Cx>
 				<Cy>0.0</Cy>
@@ -218,6 +220,20 @@
 		</sensor>
     </gazebo>
 
+	<!-- launchのcontrollerとペアで使うはずだと思うんだけど，namespaceがうまく解決できなくて，うまくいかない．むしろないと動く -->
+	<!-- <gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/burger_puntilt</robotNamespace>
+			<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+			<legacyModeNS>true</legacyModeNS>
+		</plugin>
+	</gazebo> -->
 
+	<!-- アクチュエータのない関節をpubplishするために必要らしい -->
+	<!-- <gazebo>
+      <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+        <jointName></jointName>
+      </plugin>
+    </gazebo> -->
 
 </robot>

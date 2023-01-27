@@ -134,32 +134,10 @@
     </sensor>
   </gazebo>
 
-	<xacro:arg name="camera_name" default="realsense" />
-	<xacro:arg name="reference_link" default="camera_color_frame" />
-	<xacro:arg name="topics_ns" default="puntilt" />
-	<xacro:arg name="depth_optical_frame" default="camera_depth_optical_frame" />
-	<xacro:arg name="color_optical_frame" default="camera_color_optical_frame" />
-	<xacro:arg name="infrared1_optical_frame" default="camera_infra1_optical_frame" />
-	<xacro:arg name="infrared2_optical_frame" default="camera_infra2_optical_frame" />
-	<xacro:arg name="publish_pointcloud" default="true" />
-
 	<!-- realsense -->
-   <gazebo reference="$(arg reference_link)">
-      <self_collide>0</self_collide>
-      <enable_wind>0</enable_wind>
-      <kinematic>0</kinematic>
-      <gravity>1</gravity>
-      <!--<mu>1</mu>-->
-      <mu2>1</mu2>
-      <fdir1>0 0 0</fdir1>
-      <!--<slip1>0</slip1>
-      <slip2>0</slip2>-->
-      <kp>1e+13</kp>
-      <kd>1</kd>
-      <!--<max_vel>0.01</max_vel>
-      <min_depth>0</min_depth>-->
-      <sensor name="$(arg camera_name)_color" type="camera">
-        <camera name="$(arg camera_name)">
+	<gazebo reference="camera_color_frame">
+      <sensor type="camera" name="realsense_color">
+ 			<camera name="realsense">
           <horizontal_fov>${radians(69.4)}</horizontal_fov>
           <image>
             <width>640</width>
@@ -179,101 +157,71 @@
         <always_on>1</always_on>
         <update_rate>30</update_rate>
         <visualize>1</visualize>
-      </sensor>
-      <sensor name="$(arg camera_name)_ired1" type="camera">
-        <camera name="$(arg camera_name)">
-          <horizontal_fov>${radians(85.2)}</horizontal_fov>
-          <image>
-            <width>1280</width>
-            <height>720</height>
-            <format>L_INT8</format>
-          </image>
-          <clip>
-            <near>0.1</near>
-            <far>100</far>
-          </clip>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.05</stddev>
-          </noise>
-        </camera>
-        <always_on>1</always_on>
-        <update_rate>90</update_rate>
-        <visualize>0</visualize>
-      </sensor>
-      <sensor name="$(arg camera_name)_ired2" type="camera">
-        <camera name="$(arg camera_name)">
-          <horizontal_fov>${radians(85.2)}</horizontal_fov>
-          <image>
-            <width>1280</width>
-            <height>720</height>
-            <format>L_INT8</format>
-          </image>
-          <clip>
-            <near>0.1</near>
-            <far>100</far>
-          </clip>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.05</stddev>
-          </noise>
-        </camera>
-        <always_on>1</always_on>
-        <update_rate>90</update_rate>
-        <visualize>0</visualize>
-      </sensor>
-      <sensor name="$(arg camera_name)_depth" type="depth">
-        <camera name="$(arg camera_name)">
-          <horizontal_fov>${radians(85.2)}</horizontal_fov>
-          <image>
-            <width>1280</width>
-            <height>720</height>
-          </image>
-          <clip>
-            <near>0.1</near>
-            <far>100</far>
-          </clip>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.100</stddev>
-          </noise>
-        </camera>
-        <always_on>1</always_on>
-        <update_rate>90</update_rate>
-        <visualize>0</visualize>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30.0</updateRate>
+          <cameraName>tb3_puntilt/realsense/color</cameraName>
+          <imageTopicName>	image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera_color_frame</frameName>
+          <hackBaseline>0.0</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
       </sensor>
     </gazebo>
 
-    <gazebo>
-      <plugin name="$(arg topics_ns)" filename="librealsense_gazebo_plugin.so">
-        <prefix>$(arg camera_name)</prefix>
-        <depthUpdateRate>30.0</depthUpdateRate>
-        <colorUpdateRate>30.0</colorUpdateRate>
-        <infraredUpdateRate>30.0</infraredUpdateRate>
-        <depthTopicName>depth/image_raw</depthTopicName>
-        <depthCameraInfoTopicName>depth/camera_info</depthCameraInfoTopicName>
-        <colorTopicName>color/image_raw</colorTopicName>
-        <colorCameraInfoTopicName>color/camera_info</colorCameraInfoTopicName>
-        <infrared1TopicName>infra1/image_raw</infrared1TopicName>
-        <infrared1CameraInfoTopicName>infra1/camera_info</infrared1CameraInfoTopicName>
-        <infrared2TopicName>infra2/image_raw</infrared2TopicName>
-        <infrared2CameraInfoTopicName>infra2/camera_info</infrared2CameraInfoTopicName>
-        <colorOpticalframeName>$(arg color_optical_frame)</colorOpticalframeName>
-        <depthOpticalframeName>$(arg depth_optical_frame)</depthOpticalframeName>
-        <infrared1OpticalframeName>$(arg infrared1_optical_frame)</infrared1OpticalframeName>
-        <infrared2OpticalframeName>$(arg infrared2_optical_frame)</infrared2OpticalframeName>
-        <rangeMinDepth>0.2</rangeMinDepth>
-        <rangeMaxDepth>10.0</rangeMaxDepth>
-        <pointCloud>$(arg publish_pointcloud)</pointCloud>
-        <pointCloudTopicName>depth/color/points</pointCloudTopicName>
-        <pointCloudCutoff>0.25</pointCloudCutoff>
-        <pointCloudCutoffMax>9.0</pointCloudCutoffMax>
-      </plugin>
+
+	<gazebo reference="camera_depth_frame">
+		<sensor name="depth_camera" type="depth">
+			<camera name="realsense">
+				<horizontal_fov>${radians(85.2)}</horizontal_fov>
+				<image>
+					<width>1280</width>
+					<height>720</height>
+				</image>
+				<clip>
+					<near>0.1</near>
+					<far>100</far>
+				</clip>
+				<noise>
+					<type>gaussian</type>
+					<mean>0.0</mean>
+					<stddev>0.100</stddev>
+				</noise>
+			</camera>
+			<always_on>1</always_on>
+			<update_rate>90</update_rate>
+			<visualize>0</visualize>
+			<plugin filename="libgazebo_ros_depth_camera.so" name="depth_camera_controller">
+          	<alwaysOn>true</alwaysOn>
+				<updateRate>10.0</updateRate>
+				<cameraName>tb3_puntilt/realsense/depth</cameraName>
+				<imageTopicName>color/image_raw</imageTopicName>
+				<cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
+				<pointCloudTopicName>point</pointCloudTopicName>
+				<depthImageTopicName>depth/image_raw</depthImageTopicName>
+				<depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+				<pointCloudCutoff>0.4</pointCloudCutoff>
+				<frameName>camera_depth_optical_frame</frameName>
+				<CxPrime>0.0</CxPrime>
+				<Cx>0.0</Cx>
+				<Cy>0.0</Cy>
+				<focalLength>0.0</focalLength> <!-- use computed_focal_length -->
+				<hackBaseline>0.12</hackBaseline> <!-- use for P[3] -->
+				<distortionK1>0.05</distortionK1>
+				<distortionK2>-0.05</distortionK2>
+				<distortionK3>0.0</distortionK3>
+				<distortionT1>0.0</distortionT1>
+				<distortionT2>0.0</distortionT2>
+			</plugin>
+		</sensor>
     </gazebo>
 
+	 
 	<!-- launchのcontrollerとペアで使うはずだと思うんだけど，namespaceがうまく解決できなくて，うまくいかない．むしろないと動く -->
 	<!-- <gazebo>
 		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

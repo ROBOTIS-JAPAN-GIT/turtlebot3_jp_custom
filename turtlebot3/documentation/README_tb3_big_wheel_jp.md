@@ -1,43 +1,43 @@
-[日本語](/turtlebot3/documentation/README_tb3_big_wheel_jp.md) | [English](/turtlebot3/documentation/README_tb3_big_wheel_en.md)
+[日本語](./README_tb3_big_wheel_jp.md) | [English](/turtlebot3/documentation/README_tb3_big_wheel_en.md)
 
 # TurtleBot3 Friends: Big Wheel
-![TB3 Big Wheel](/turtlebot3/documentation/tb3_big_wheel_bg.png)
+![TB3 Big Wheel](./tb3_big_wheel_bg.png)
 
 ## 実環境での動作検証
 
 | 実環境 | Rviz |
 |:---:|:---:|
-| ![TB3 Big Wheel GO](/turtlebot3/documentation/gif/tb3_big_wheel_go_top.gif) | ![TB3 Big Wheel GO rv](/turtlebot3/documentation/gif/tb3_big_wheel_go_rv.gif) | 
+| ![TB3 Big Wheel GO](./gif/tb3_big_wheel_go_top.gif) | ![TB3 Big Wheel GO rv](./gif/tb3_big_wheel_go_rv.gif) | 
 
 | 実環境 | Rviz |
 |:---:|:---:|
-| ![TB3 Big Wheel BACK1](/turtlebot3/documentation/gif/tb3_big_wheel_back_1_top.gif) | ![TB3 Big Wheel BACK rv](/turtlebot3/documentation/gif/tb3_big_wheel_back_1_rv.gif) |
+| ![TB3 Big Wheel BACK1](./gif/tb3_big_wheel_back_1_top.gif) | ![TB3 Big Wheel BACK rv](./gif/tb3_big_wheel_back_1_rv.gif) |
 
 |実環境 | Rviz |
 |:---:|:---:|
-| ![TB3 Big Wheel BACK2](/turtlebot3/documentation/gif/tb3_big_wheel_back_2_top.gif) | ![TB3 Big Wheel BACK2 rv](/turtlebot3/documentation/gif/tb3_big_wheel_back_2_rv.gif) |
+| ![TB3 Big Wheel BACK2](./gif/tb3_big_wheel_back_2_top.gif) | ![TB3 Big Wheel BACK2 rv](./gif/tb3_big_wheel_back_2_rv.gif) |
 
 ## Gazebo環境での動作検証
 
 | Gazebo環境 + Rviz | 
 |:---:|
-| ![TB3 Big Wheel BACK](/turtlebot3/documentation/gif/tb3_big_wheel_nav_x5.gif) |
+| ![TB3 Big Wheel BACK](./gif/tb3_big_wheel_nav_x5.gif) |
 
 
 ## セットアップ手順（Quick Start Guide）
 ### 1. 環境設定
-Turtlebot3の新FriendsモデルのBig Wheelを利用するには、まずTurtlebot3の基本的な設定を行う必要があります。そのため、TurtleBot3のe-Manualの「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」に従って、セットアップを行ってください。ただし、以下の変更点に注意してください。
+Turtlebot3の新FriendsモデルのBig Wheelを利用するには、まずTurtlebot3の基本的な設定を行う必要があります。そのため、TurtleBot3のe-Manualの「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」に従って、セットアップを行ってください。ただし、以下の変更点にご注意ください。
 
 - [1.1. PC Setup](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#pc-setup)について
 
-Big WheelモデルではSBCとして、Raspberry Pi 4BもしくはNUC11を使います。現時点で、ROS Humbleへの対応を行っていますのが、まず「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」の「Foxy」ブランチを選択してください。
+Big WheelモデルではSBCとして、Raspberry Pi 4BもしくはNUC11を使います。現時点で、ROS Humbleへの対応を行っていますが、「[Quick Start Guide](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/)」の`Foxy`ブランチを選択してください。
 
-> **Note**
-> 公式的に、「Humble」のバージョンが公開されていませんが、参考までお願いします。
+> **Warning**
+> 公式的に、`Humble`のバージョンが公開されていませんので、ご参考までお願いします。
 
 - [1.1.2. Install ROS 2 on Remote PC](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#install-ros-2-on-remote-pc)の変更点
 
-ROBOTIS日本支店としてのインストールスクリプトファイルと実行します。
+ROBOTIS日本支店としてのROS 2インストールスクリプトファイルと実行します。
 
 ```code
 $ wget https://raw.githubusercontent.com/ROBOTIS-JAPAN-GIT/robotis_tools_jp/master/install_ros2_humble.sh
@@ -61,13 +61,13 @@ $ sudo apt install ros-humble-nav2-bringup
 
 - [1.1.4. Install TurtleBot3 Packages](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#install-turtlebot3-packages)の変更点
 
-この部分では必要なROSパッケージをインストールしますが、今回はDebianのバイナルパッケージを使わずに、ROBOTIS日本支店の公式GitHubからダウンロードします。以下の手順通りセットアップを進めてください。
+この部分では必要なROSパッケージをインストールしますが、今回はDebianのバイナリーパッケージのではなく、ROBOTIS日本支店の公式GitHubからダウンロードします。以下の手順通りセットアップを進めてください。
 
 ```code
 $ sudo apt remove ros-humble-dynamixel-sdk
 $ sudo apt remove ros-humble-turtlebot3-msgs
 $ sudo apt remove ros-humble-turtlebot3
-# 上記のパッケージがないメッセージが表示される場合、無視しても大丈夫です
+# 上記のパッケージがないとのメッセージが表示される場合、無視しても大丈夫です
 
 $ mkdir -p ~/turtlebot3_ws/src
 $ cd ~/turtlebot3_ws/src/
@@ -82,7 +82,7 @@ $ source ~/.bashrc
 
 - [1.1.5. Environment Configuration](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/#environment-configuration)の変更点
 
-次のようにROSの環境を設定します。
+次のようにROSの環境をご設定ください。
 ```code
 $ echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
 $ source ~/.bashrc
@@ -93,12 +93,12 @@ $ source ~/.bashrc
 NUC11をBig WheelのSBCとして使う場合には、e-Manualに記載されているセットアップ手順は実行せずに、次のような手順でセットアップを行います。
 
 > **Warning**
-> 実機での動作確認はまだされていません。自己責任でご参考ください。まだ検証中です。
+> 実機での動作確認はまだされていませんので、自己責任でご参考ください。まだ検証中です。
 
 > **Note**
-> Raspberry Pi 4Bを用いる場合は、e-Manualを参考に通常のTurtleBot3と同様のセットアップ手順によりネットワークの設定を行ってください。
+> Raspberry Pi 4Bを用いる場合は、e-Manualを参考に通常のTurtleBot3と同様のセットアップ手順によりネットワークを設定してください。
 
-1. NUCにUbuntu 20.04をインストールします。
+1. NUCにUbuntu 22.04をインストールします。
 
 2. ROS Humbleをインストールします。
 
@@ -123,16 +123,16 @@ $ source ~/.bashrc
 
 - [3.3. OpenCR Setup](https://emanual.robotis.com/docs/en/platform/turtlebot3/opencr_setup)の変更点
 
-OpenCRを設定するには、Raspberry Pi 4BもしくはNUC（使用しているSBC）を通して、セットアップを行います。
+OpenCRを設定するには、Raspberry Pi 4BもしくはNUC11（使用しているSBC）を通して、セットアップを行います。
 
-1. [OpenCR](https://emanual.robotis.com/docs/en/parts/controller/opencr10/)をmicro USBケーブル経由でNUCに繋げてください。
+1. [OpenCR](https://emanual.robotis.com/docs/en/parts/controller/opencr10/)をmicro USBケーブル経由でNUC11に繋げてください。
 
-2. OpenCRにファームウェアをアップロードするには、NUCに必要なDebianパッケージをインストールします。
+<!-- 2. OpenCRにファームウェアをアップロードするには、NUCに必要なDebianパッケージをインストールします。
 ```code
 $ sudo dpkg --add-architecture armhf
 $ sudo apt-get update
 $ sudo apt-get install libc6:armhf
-```
+``` -->
 
 3. OPENCR_MODELに```big_wheel```と書きます。
 ```code
@@ -141,7 +141,7 @@ $ export OPENCR_MODEL=big_wheel_humble
 $ rm -rf ./opencr_update.tar.bz2
 ```
 
-4. ファームウェアをダウンロードして、解凍します。(ToDo）
+4. ファームウェアをダウンロードして、解凍します。`TODO`
 ```code
 $ wget https://github.com/ROBOTIS-JAPAN-GIT/OpenCR_jp_custom/releases/download/v1.0.0/opencr_update_jp_custom.tar.bz2
 $ tar -xvf opencr_update_jp_custom.tar.bz2 
@@ -170,11 +170,15 @@ Turtlebot3のBig Wheelモデルには、デフォルトとして「Realsense D43
 $ sudo apt-get install ros-$ROS_DISTRO-realsense2-camera
 $ cd ~/turtlebot3_ws/src
 $ git clone -b humble-jp-devel https://github.com/ROBOTIS-JAPAN-GIT/realsense-ros_jp_custom
+$ git clone -b foxy-devel https://github.com/pal-robotics/realsense_gazebo_plugin
 $ cd ~/turtlebot3_ws
 $ colcon build --symlink-install
 ```
 > **Note**
 > [realsense-ros](https://github.com/IntelRealSense/realsense-ros)の設定手順のついて詳しく公式のGitHubに参照してください。
+
+> **Note**
+> RealSenseの対応を確認したい方は[Intel RealSense Gazebo ROS plugin](https://github.com/pal-robotics/realsense_gazebo_plugin)を参考ください。
 
 
 1. **LiDAR設定**
@@ -250,10 +254,10 @@ $ ros2 launch turtlebot3_gazebo empty_world.launch.py
 （イメージ図）
 | モデル名 | 画像 |
 |:---:|:---:|
-| turtlebot3_jp_world_static | ![TB3 static](/turtlebot3/documentation/gif/turtlebot3_jp_world_static.png) | 
-| turtlebot3_jp_world_dynamic | ![TB3 dynamic](/turtlebot3/documentation/gif/turtlebot3_jp_world_dynamic.gif) |
-| turtlebot3_jp_world_corridor_pedestrian | ![TB3 corridor](/turtlebot3/documentation/gif/turtlebot3_jp_world_corridor.gif) |
-| turtlebot3_jp_world_corridor_pedestrian (rgbd) | ![TB3 corridor rgbd](/turtlebot3/documentation/gif/turtlebot3_jp_world_corridor_rgbd.gif) |
+| turtlebot3_jp_world_static | ![TB3 static](./gif/turtlebot3_jp_world_static.png) | 
+| turtlebot3_jp_world_dynamic | ![TB3 dynamic](./gif/turtlebot3_jp_world_dynamic.gif) |
+| turtlebot3_jp_world_corridor_pedestrian | ![TB3 corridor](./gif/turtlebot3_jp_world_corridor.gif) |
+| turtlebot3_jp_world_corridor_pedestrian (rgbd) | ![TB3 corridor rgbd](./gif/turtlebot3_jp_world_corridor_rgbd.gif) |
 
 
 ## ハードウェア関係

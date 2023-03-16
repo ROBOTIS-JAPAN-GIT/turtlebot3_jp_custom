@@ -1,7 +1,7 @@
-[日本語](/turtlebot3/documentation/README_tb3_big_wheel_jp.md) | [English](/turtlebot3/documentation/README_tb3_big_wheel_en.md)
+[日本語](./README_tb3_big_wheel_jp.md) | [English](./README_tb3_big_wheel_en.md)
 
 # TurtleBot3 Friends: Big Wheel
-![TB3 Big Wheel](/turtlebot3/documentation/tb3_big_wheel_bg.png)
+![TB3 Big Wheel](./tb3_big_wheel_bg.png)
 
 ## In Development Process
 
@@ -9,21 +9,21 @@
 
 | Real-world | Rviz |
 |:---:|:---:|
-| ![TB3 Big Wheel GO](/turtlebot3/documentation/gif/tb3_big_wheel_go_top.gif) | ![TB3 Big Wheel GO rv](/turtlebot3/documentation/gif/tb3_big_wheel_go_rv.gif) | 
+| ![TB3 Big Wheel GO](./gif/tb3_big_wheel_go_top.gif) | ![TB3 Big Wheel GO rv](./gif/tb3_big_wheel_go_rv.gif) | 
 
 | Real-world | Rviz |
 |:---:|:---:|
-| ![TB3 Big Wheel BACK1](/turtlebot3/documentation/gif/tb3_big_wheel_back_1_top.gif) | ![TB3 Big Wheel BACK rv](/turtlebot3/documentation/gif/tb3_big_wheel_back_1_rv.gif) |
+| ![TB3 Big Wheel BACK1](./gif/tb3_big_wheel_back_1_top.gif) | ![TB3 Big Wheel BACK rv](./gif/tb3_big_wheel_back_1_rv.gif) |
 
 | 実環境 | Rviz |
 |:---:|:---:|
-| ![TB3 Big Wheel BACK2](/turtlebot3/documentation/gif/tb3_big_wheel_back_2_top.gif) | ![TB3 Big Wheel BACK2 rv](/turtlebot3/documentation/gif/tb3_big_wheel_back_2_rv.gif) |
+| ![TB3 Big Wheel BACK2](./gif/tb3_big_wheel_back_2_top.gif) | ![TB3 Big Wheel BACK2 rv](./gif/tb3_big_wheel_back_2_rv.gif) |
 
 ## Navigation Demo in Gazebo environment
 
 | Gazebo + Rviz | 
 |:---:|
-| ![TB3 Big Wheel BACK](/turtlebot3/documentation/gif/tb3_big_wheel_nav_x5.gif) |
+| ![TB3 Big Wheel BACK](./gif/tb3_big_wheel_nav_x5.gif) |
 
 
 ## Setup Manual（Quick Start Guide）
@@ -248,10 +248,10 @@ $ ros2 launch turtlebot3_gazebo empty_world.launch.py
 (This is just an image)
 | World Name | Image |
 |:---:|:---:|
-| turtlebot3_jp_world_static | ![TB3 static](/turtlebot3/documentation/gif/turtlebot3_jp_world_static.png) | 
-| turtlebot3_jp_world_dynamic | ![TB3 dynamic](/turtlebot3/documentation/gif/turtlebot3_jp_world_dynamic.gif) |
-| turtlebot3_jp_world_corridor_pedestrian | ![TB3 corridor](/turtlebot3/documentation/gif/turtlebot3_jp_world_corridor.gif) |
-| turtlebot3_jp_world_corridor_pedestrian (rgbd) | ![TB3 corridor rgbd](/turtlebot3/documentation/gif/turtlebot3_jp_world_corridor_rgbd.gif) |
+| turtlebot3_jp_world_static | ![TB3 static](./gif/turtlebot3_jp_world_static.png) | 
+| turtlebot3_jp_world_dynamic | ![TB3 dynamic](./gif/turtlebot3_jp_world_dynamic.gif) |
+| turtlebot3_jp_world_corridor_pedestrian | ![TB3 corridor](./gif/turtlebot3_jp_world_corridor.gif) |
+| turtlebot3_jp_world_corridor_pedestrian (rgbd) | ![TB3 corridor rgbd](./gif/turtlebot3_jp_world_corridor_rgbd.gif) |
 
 ## Hardware Related
 ### Bill Of Materials（BOM）

@@ -1,4 +1,4 @@
-[日本語](/README.md) | [English](/README_en.md)
+[日本語](./README.md) | [English](./README_en.md)
 
 # TurtleBot3 ROBITIS Japan
 <img src="https://github.com/ROBOTIS-GIT/emanual/blob/master/assets/images/platform/turtlebot3/logo_turtlebot3.png" width="300">
@@ -21,15 +21,15 @@
 
 | TB3 Pizza | TB3 Big Wheel |
 |:---:|:---:|
-| ![TB3 Pizza](/turtlebot3/documentation/tb3_pizza.png) | ![TB3 Big Wheel](/turtlebot3/documentation/tb3_big_wheel.png) |
-| ToDo | [マニュアル](/turtlebot3/documentation/README_tb3_big_wheel_jp.md) |
-<!-- | [マニュアル](/turtlebot3/documentation//README_tb3_pizza_jp.md) | [マニュアル](/turtlebot3/documentation/README_tb3_big_wheel_jp.md) | -->
+| ![TB3 Pizza](./turtlebot3/documentation/tb3_pizza.png) | ![TB3 Big Wheel](./turtlebot3/documentation/tb3_big_wheel.png) |
+| ToDo | [マニュアル](./turtlebot3/documentation/README_tb3_big_wheel_jp.md) |
+<!-- | [マニュアル](./turtlebot3/documentation//README_tb3_pizza_jp.md) | [マニュアル](./turtlebot3/documentation/README_tb3_big_wheel_jp.md) | -->
 
 | TB3 Big Wheel 3RS | TB3 Big Wheel with SARA |
 |:---:|:---:|
-| ![TB3 Big Wheel 3RS](/turtlebot3/documentation/tb3_big_wheel_3rs.png) | ![TB3 Big Wheel with SARA](/turtlebot3/documentation/tb3_big_wheel_with_sara.png) |
+| ![TB3 Big Wheel 3RS](./turtlebot3/documentation/tb3_big_wheel_3rs.png) | ![TB3 Big Wheel with SARA](./turtlebot3/documentation/tb3_big_wheel_with_sara.png) |
 | ToDo | ToDo |
-<!-- | [マニュアル](/turtlebot3/documentation/README_tb3_big_wheel_3rs_jp.md) | [マニュアル](/turtlebot3/documentation/README_tb3_big_wheel_with_sara_jp.md) | -->
+<!-- | [マニュアル](./turtlebot3/documentation/README_tb3_big_wheel_3rs_jp.md) | [マニュアル](./turtlebot3/documentation/README_tb3_big_wheel_with_sara_jp.md) | -->
 
 </center>
 

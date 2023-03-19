@@ -4,10 +4,6 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
-        - /Status1
-        - /RobotModel1
-        - /Camera1
         - /PointCloud21
       Splitter Ratio: 0.5
     Tree Height: 685
@@ -168,7 +164,7 @@ Visualization Manager:
     - Class: rviz/Camera
       Enabled: true
       Image Rendering: background and overlay
-      Image Topic: /tb3_puntilt/realsense/color/image_raw
+      Image Topic: /camera/color/image_raw
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
@@ -177,11 +173,13 @@ Visualization Manager:
       Value: true
       Visibility:
         Grid: true
+        Map: true
         PointCloud2: true
         RobotModel: true
+        TF: true
         Value: true
       Zoom Factor: 1
-    - Alpha: 1
+    - Alpha: 0.5
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
         Max Value: 10
@@ -204,10 +202,115 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.009999999776482582
       Style: Flat Squares
-      Topic: /tb3_puntilt/realsense/depth/point
+      Topic: /camera/depth/color/points
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
+      Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: Map
+      Topic: /map_hole
+      Unreliable: false
+      Use Timestamp: false
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        base_puntilt:
+          Value: true
+        base_realsense:
+          Value: true
+        base_scan:
+          Value: true
+        camera_bottom_screw_frame:
+          Value: true
+        camera_color_frame:
+          Value: true
+        camera_color_optical_frame:
+          Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
+        camera_infra1_frame:
+          Value: true
+        camera_infra1_optical_frame:
+          Value: true
+        camera_infra2_frame:
+          Value: true
+        camera_infra2_optical_frame:
+          Value: true
+        camera_link:
+          Value: true
+        caster_back_link:
+          Value: true
+        dynx_2XL430:
+          Value: true
+        dynx_2XL430_hone_pitch:
+          Value: true
+        dynx_2XL430_hone_yaw:
+          Value: true
+        imu_link:
+          Value: true
+        map:
+          Value: true
+        odom:
+          Value: true
+        wheel_left_link:
+          Value: true
+        wheel_right_link:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                base_puntilt:
+                  dynx_2XL430_hone_yaw:
+                    dynx_2XL430:
+                      dynx_2XL430_hone_pitch:
+                        base_realsense:
+                          camera_bottom_screw_frame:
+                            camera_link:
+                              camera_color_frame:
+                                camera_color_optical_frame:
+                                  {}
+                              camera_depth_frame:
+                                camera_depth_optical_frame:
+                                  {}
+                              camera_infra1_frame:
+                                camera_infra1_optical_frame:
+                                  {}
+                              camera_infra2_frame:
+                                camera_infra2_optical_frame:
+                                  {}
+                base_scan:
+                  {}
+                caster_back_link:
+                  {}
+                imu_link:
+                  {}
+                wheel_left_link:
+                  {}
+                wheel_right_link:
+                  {}
+      Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
@@ -237,7 +340,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.1023573875427246
+      Distance: 8.00124454498291
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -245,17 +348,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 0.3974735736846924
+        Y: -0.09433696419000626
+        Z: 0.5622377991676331
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9103977680206299
+      Pitch: 0.6097962856292725
       Target Frame: <Fixed Frame>
-      Yaw: 4.273581027984619
+      Yaw: 4.918580055236816
     Saved: ~
 Window Geometry:
   Camera:
@@ -276,4 +379,4 @@ Window Geometry:
     collapsed: false
   Width: 1842
   X: 78
-  Y: 31
+  Y: 163

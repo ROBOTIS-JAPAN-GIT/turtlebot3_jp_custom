@@ -2,22 +2,23 @@
 	<arg name="model" default="burger"/>
 	<arg name="lds_model" default="LDS-02"/>
 	<!-- <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi, pizza, big_wheel]"/>
-  	<arg name="lds_model" default="$(env LDS_MODEL)" doc="LDS MODEL [LDS-01, LDS-02]"/> -->
-	<arg name="x_pos" default="0.0"/>
-	<arg name="y_pos" default="0.0"/>
-	<arg name="z_pos" default="0.0"/>
+  	<arg name="lds_model" default="$(env LDS_MODEL)" doc="LDS MODEL [LDS-01, LDS-02]"/> --> <!-- 未対応 -->
+	<arg name="x_pos" default="-1"/>
+	<arg name="y_pos" default="0"/>
+	<arg name="z_pos" default="0.5"/>
 
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
-		<arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_jp_world_static.world"/>
+		<arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_hole_stage.world"/>
 		<arg name="paused" value="false"/>
 		<arg name="use_sim_time" value="true"/>
 		<arg name="gui" value="true"/>
 		<arg name="headless" value="false"/>
 		<arg name="debug" value="false"/>
-	</include>  
+	</include>
  
 	<param name="robot_description" command="$(find xacro)xacro $(find turtlebot3_description)/urdf/turtlebot3_$(arg model)_puntilt.urdf.xacro --inorder" />
-
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 	<node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
 
 	<!-- パンチルトを動かすためのノードを起動 -->
@@ -31,31 +32,11 @@
    </rosparam>
    <node name = "controller_spawner" pkg = "controller_manager" type = "spawner" args = "puntilt_controller"/>
 
-	<!-- 点群のTFをURDFでやる方法がわからないので，一旦． -->
-
 	<!-- 確認用の rviz -->
 	<include file="$(find turtlebot3_description)/launch/display_robot_in_rviz.launch" />
 
-	<!-- Slam用のノードを起動--> 
-	<!-- Arguments -->
-	<arg name="set_base_frame" default="base_footprint"/>
-	<arg name="set_odom_frame" default="odom"/>
-	<arg name="set_map_frame"  default="map"/>
-
-	<!-- Gmapping -->
-	<node pkg="gmapping" type="slam_gmapping" name="turtlebot3_slam_gmapping" output="screen">
-		<param name="base_frame" value="$(arg set_base_frame)"/>
-		<param name="odom_frame" value="$(arg set_odom_frame)"/>
-		<param name="map_frame"  value="$(arg set_map_frame)"/>
-		<rosparam command="load" file="$(find turtlebot3_slam)/config/gmapping_params.yaml" />
-		<param name="maxUrange" value="8.0" />
-	</node>
-
-	<!-- rviz -->
-	<node pkg="rviz" type="rviz" name="rviz_slam" required="false"
-			args="-d $(find turtlebot3_slam)/rviz/turtlebot3_gmapping.rviz"/>
-
 	<!-- demo用の動作コマンドをpubするノード -->
-	<node pkg="turtlebot3_example" type="turtlebot3_burger_puntilt_demo" name="turtlebot3_burger_puntilt_demo" output="screen">
+	<node pkg="turtlebot3_example" type="turtlebot3_burger_puntilt_demo1" name="turtlebot3_burger_puntilt_demo1">
 	</node>
+
 </launch>

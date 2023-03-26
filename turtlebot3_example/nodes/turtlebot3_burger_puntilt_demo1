@@ -38,7 +38,7 @@ def callback_img(msg):
         x, y, w, h = cv2.boundingRect(largest_contour)
         print(msg.width/2 - (x+w/2), msg.height/2 - (y+h/2))
         point.positions =(
-            now_pos[0] - (msg.width /2 - (x+w/2)) / 1000, 
+            now_pos[0] + (msg.width /2 - (x+w/2)) / 1000, 
             now_pos[1] + (msg.height/2 - (y+h/2)) / 1000
         )
 

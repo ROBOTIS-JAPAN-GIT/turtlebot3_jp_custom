@@ -1,5 +1,6 @@
 <launch>
 	<arg name="model" default="burger"/>
+	<arg name="option" default="_puntilt_XM430" doc="support option [_puntilt_XM430, _puntilt_2XL430]"/>
 	<arg name="lds_model" default="LDS-02"/>
 	<!-- <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi, pizza, big_wheel]"/>
   	<arg name="lds_model" default="$(env LDS_MODEL)" doc="LDS MODEL [LDS-01, LDS-02]"/> --> <!-- 未対応 -->
@@ -16,9 +17,9 @@
 		<arg name="debug" value="false"/>
 	</include>
  
-	<param name="robot_description" command="$(find xacro)xacro $(find turtlebot3_description)/urdf/turtlebot3_$(arg model)_puntilt.urdf.xacro --inorder" />
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<param name="robot_description" command="$(find xacro)xacro $(find turtlebot3_description)/urdf/turtlebot3_$(arg model)$(arg option).urdf.xacro --inorder" />
+    
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 	<node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
 
 	<!-- パンチルトを動かすためのノードを起動 -->
@@ -36,7 +37,5 @@
 	<include file="$(find turtlebot3_description)/launch/display_robot_in_rviz.launch" />
 
 	<!-- demo用の動作コマンドをpubするノード -->
-	<node pkg="turtlebot3_example" type="turtlebot3_burger_puntilt_demo1" name="turtlebot3_burger_puntilt_demo1">
-	</node>
-
+	<node pkg="turtlebot3_example" type="turtlebot3_burger_puntilt_demo1" name="turtlebot3_burger_puntilt_demo1"/>
 </launch>

@@ -135,26 +135,16 @@
   </gazebo>
 
 	<!-- realsense -->
-	<!-- sensor_d435　マクロ内で処理しているのでこちらには不要　-->>
+	<!-- sensor_d435　マクロ内で処理しているのでこちらには不要　-->
 
 	<!-- puntilt -->
-	<!-- motor_2XL430　マクロ内で処理しているのでこちらには不要　-->>
+        <!--ros_controlプラグインをロード-->
+        <gazebo>
+            <plugin name="control" filename="libgazebo_ros_control.so">
+            </plugin>
+        </gazebo>
 
-	<!-- launchのcontrollerとペアで使うはずだと思うんだけど，namespaceがうまく解決できなくて，うまくいかない．むしろないと動く -->
-	<!-- <gazebo>
-		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-			<robotNamespace>/burger_puntilt</robotNamespace>
-			<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-			<legacyModeNS>true</legacyModeNS>
-		</plugin>
-	</gazebo> -->
-
-	<!-- アクチュエータのない関節をpubplishするために必要らしい -->
-	<!-- <gazebo>
-      <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-        <jointName></jointName>
-      </plugin>
-    </gazebo> -->
+    	<!-- Joint state については　motor_2XL430やXM430　マクロ内で処理しているので不要　-->
 
 </robot>
 

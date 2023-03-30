@@ -143,7 +143,7 @@ $ rm -rf ./opencr_update.tar.bz2
 
 4. ファームウェアをダウンロードして、解凍します。`TODO`
 ```code
-$ wget https://github.com/ROBOTIS-JAPAN-GIT/OpenCR_jp_custom/releases/download/v1.0.0/opencr_update_jp_custom.tar.bz2
+$ wget wget https://github.com/ROBOTIS-JAPAN-GIT/OpenCR_jp_custom/releases/download/ros2v1.0.0/opencr_update_jp_custom.tar.bz2
 $ tar -xvf opencr_update_jp_custom.tar.bz2 
 ```
 

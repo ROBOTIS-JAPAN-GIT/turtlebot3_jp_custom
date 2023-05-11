@@ -223,6 +223,7 @@ $ cd ~/catkin_ws && catkin_make
 そして、新しいターミナルを開くたびに、Turtlebot3のモデルも指定してください。
 ```code 
 $ export TURTLEBOT3_MODEL=big_wheel
+$ export TURTLEBOT3_PLAT=false
 ```
 
 > **Note**
@@ -252,6 +253,7 @@ $ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 
 ```code 
 $ export TURTLEBOT3_MODEL=big_wheel
+$ export TURTLEBOT3_PLAT=false
 $ roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
 ```
 > **Note**

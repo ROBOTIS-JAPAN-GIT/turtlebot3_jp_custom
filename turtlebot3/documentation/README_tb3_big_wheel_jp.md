@@ -227,7 +227,7 @@ $ export TURTLEBOT3_PLAT=false
 ```
 
 > **Note**
-> 新しい端末をたちが得るたびに、以上のコマンドを実行する必要があります。そして、`big_wheel`以外にも、`burger`, `waffle_pi`, `pizza`というモデルもあります。
+> 新しい端末をたちが得るたびに、以上のコマンドを実行する必要があります。そして、`big_wheel`以外にも、`burger`, `waffle_pi`, `pizza`等というモデルもあります。
 
 1. まず**NUC側**でroscoreを起動します。
 ```code

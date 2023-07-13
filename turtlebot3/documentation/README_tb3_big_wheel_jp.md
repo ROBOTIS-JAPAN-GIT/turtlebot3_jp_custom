@@ -127,12 +127,12 @@ OpenCRを設定するには、Raspberry Pi 4BもしくはNUC11（使用してい
 
 1. [OpenCR](https://emanual.robotis.com/docs/en/parts/controller/opencr10/)をmicro USBケーブル経由でNUC11に繋げてください。
 
-<!-- 2. OpenCRにファームウェアをアップロードするために必要なDebianパッケージをRaspberry Pi 4Bへインストールします。NUCの場合は不要です。
+2. OpenCRにファームウェアをアップロードするために必要なDebianパッケージをRaspberry Pi 4Bへインストールします。NUCの場合は不要です。
 ```code
 $ sudo dpkg --add-architecture armhf
 $ sudo apt-get update
 $ sudo apt-get install libc6:armhf
-``` -->
+```
 
 3. OPENCR_MODELに```big_wheel```と書きます。
 ```code

@@ -4,12 +4,14 @@
 	<arg name="lds_model" default="LDS-02"/>
 	<!-- <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi, pizza, big_wheel]"/>
   	<arg name="lds_model" default="$(env LDS_MODEL)" doc="LDS MODEL [LDS-01, LDS-02]"/> --> <!-- 未対応 -->
-	<arg name="x_pos" default="-1"/>
+	<arg name="x_pos" default="0"/>
 	<arg name="y_pos" default="0"/>
 	<arg name="z_pos" default="0.5"/>
 
+	<!--<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_hole_stage.world"/>-->
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
-		<arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_hole_stage.world"/>
+		<arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_jp_world_ped_horizontal.world"/>
 		<arg name="paused" value="false"/>
 		<arg name="use_sim_time" value="true"/>
 		<arg name="gui" value="true"/>

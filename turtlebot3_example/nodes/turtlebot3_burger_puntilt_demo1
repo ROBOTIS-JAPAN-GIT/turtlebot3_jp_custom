@@ -31,7 +31,7 @@ def callback_img(msg):
     print(now_pos)
     point = JointTrajectoryPoint()
     point.positions = [0,0]
-    point.time_from_start = rospy.Duration.from_sec(1)
+    point.time_from_start = rospy.Duration.from_sec(0.7)
     
     if len(contours)!=0:
         largest_contour = max(contours, key=cv2.contourArea)
@@ -39,7 +39,8 @@ def callback_img(msg):
         print(msg.width/2 - (x+w/2), msg.height/2 - (y+h/2))
         point.positions =(
             now_pos[0] + (msg.width /2 - (x+w/2)) / 1000, 
-            now_pos[1] + (msg.height/2 - (y+h/2)) / 1000
+            0.20
+            # now_pos[1] + (msg.height/2 - (y+h/2)) / 1000
         )
 
     joint_trajectory = JointTrajectory()

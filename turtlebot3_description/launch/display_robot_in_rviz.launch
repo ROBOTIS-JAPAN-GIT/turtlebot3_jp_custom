@@ -1,0 +1,7 @@
+<launch>
+  <arg name="rviz_file_address" default="$(find turtlebot3_description)/rviz/display.rviz" />
+
+  <param name="use_gui" value="true"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_file_address)" required="true" />
+</launch>

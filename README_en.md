@@ -23,7 +23,7 @@
 |:---:|:---:|
 | ![TB3 Pizza](./turtlebot3/documentation/tb3_pizza.png) | ![TB3 Big Wheel](./turtlebot3/documentation/tb3_big_wheel.png) |
 | ToDo | [マニュアル](./turtlebot3/documentation/README_tb3_big_wheel_jp.md) |
-<!-- | [マニュアル](./turtlebot3/documentation//README_tb3_pizza_jp.md) | [マニュアル](./turtlebot3/documentation/README_tb3_big_wheel_jp.md) | -->
+<!-- | [マニュアル](./turtlebot3/documentation//README_tb3_pizza_jp.md) | [Manual](./turtlebot3/documentation/README_tb3_big_wheel_jp.md) | -->
 
 | TB3 Big Wheel 3RS | TB3 Big Wheel with SARA |
 |:---:|:---:|

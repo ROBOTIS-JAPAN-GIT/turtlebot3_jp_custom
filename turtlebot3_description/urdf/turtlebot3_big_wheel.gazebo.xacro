@@ -182,6 +182,29 @@
     </gazebo>
   </xacro:if>
 
+
+
+  <gazebo reference="rpi_link">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="battery_link">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+
   <gazebo reference="base_camera_link">
     <material>Gazebo/DarkGrey</material>
   </gazebo>

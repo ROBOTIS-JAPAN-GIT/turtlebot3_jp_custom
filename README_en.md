@@ -22,12 +22,12 @@
 | TB3 Pizza | TB3 Big Wheel |
 |:---:|:---:|
 | ![TB3 Pizza](/turtlebot3/documentation/tb3_pizza.png) | ![TB3 Big Wheel](/turtlebot3/documentation/tb3_big_wheel.png) |
-| [マニュアル](/turtlebot3/documentation//README_tb3_pizza_jp.md) | [マニュアル](/turtlebot3/documentation/README_tb3_big_wheel_jp.md) |
+| [Manual](/turtlebot3/documentation//README_tb3_pizza_jp.md) | [Manual](/turtlebot3/documentation/README_tb3_big_wheel_jp.md) |
 
 | TB3 Big Wheel 3RS | TB3 Big Wheel with SARA |
 |:---:|:---:|
 | ![TB3 Big Wheel 3RS](/turtlebot3/documentation/tb3_big_wheel_3rs.png) | ![TB3 Big Wheel with SARA](/turtlebot3/documentation/tb3_big_wheel_with_sara.png) |
-| [マニュアル](/turtlebot3/documentation/README_tb3_big_wheel_3rs_jp.md) | [マニュアル](/turtlebot3/documentation/README_tb3_big_wheel_with_sara_jp.md) |
+| [Manual](/turtlebot3/documentation/README_tb3_big_wheel_3rs_jp.md) | [Manual](/turtlebot3/documentation/README_tb3_big_wheel_with_sara_jp.md) |
 
 </center>
 

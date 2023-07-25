@@ -334,6 +334,8 @@
   </link>
 
 
+
+
   <xacro:sensor_d435 parent="camera_base_front_link" name="camera_front" use_nominal_extrinsics="$(arg use_nominal_extrinsics)" add_plug="$(arg add_plug)" use_mesh="$(arg use_mesh)" topics_ns="camera_front">
     <origin xyz="0.016 0.036 0.0" rpy="0 0 0"/>
   </xacro:sensor_d435>

@@ -346,6 +346,8 @@
       <geometry>
         <box size="0.055 0.040 0.02"/>
       </geometry>
+      <material name="dark"/>
+
     </visual>
    
     <inertial>
@@ -370,6 +372,7 @@
       <geometry>
         <box size="0.08 0.03 0.02"/>
       </geometry>
+      <material name="dark"/>
     </visual>
    
     <inertial>

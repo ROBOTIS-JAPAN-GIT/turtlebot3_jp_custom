@@ -241,9 +241,10 @@ $ cd ~/catkin_ws && catkin_make
 > sshよりNUCに繋ぐとき、NUCのIPアドレス（192.168.X.XXX）を使用することになります。
 
 そして、新しいターミナルを開くたびに、Turtlebot3のモデルも指定してください。
-```code 
+```code
 $ export TURTLEBOT3_MODEL=big_wheel
 $ export TURTLEBOT3_PLAT=true
+$ export LDS_MODEL=LDS-01
 ```
 
 > **Note**

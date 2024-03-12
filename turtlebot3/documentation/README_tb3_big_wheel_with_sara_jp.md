@@ -1,7 +1,7 @@
 [日本語](/turtlebot3/documentation/README_tb3_big_wheel_with_sara_jp.md) | [English](/turtlebot3/documentation/README_tb3_big_wheel_with_sara_en.md)
 
 # TurtleBot3 Friends: Big Wheel with SARA
-![TB3 Big Wheel with SARA](/turtlebot3/documentation/tb3_big_wheel_with_sara.png)
+![TB3 Big Wheel with SARA](/turtlebot3/documentation/tb3_big_wheel_with_sara_bg.png)
 
 # 注意：Gazeboのみの対応。実機への対応中。
 
@@ -68,6 +68,13 @@ $ sudo apt install ros-noetic-ros-control* ros-noetic-control* ros-noetic-moveit
 $ cd ~/catkin_ws && catkin_make
 $ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 ```
+
+
+◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+#　注意:ここからは実機用の手順になります
+[シミュレーションでの手順へ移動](#3-追加レポジトリの設定)
+
+
 
 - [3.2. SBC Setup](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/#sbc-setup)について
 
@@ -185,6 +192,9 @@ export ROS_HOSTNAME=192.168.X.YYY
 $ source ~/.bashrc
 ```
 
+◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+ここからシミュレーションの手順へ戻ります
+
 ### 3. 追加レポジトリの設定
 Turtlebot3のBig Wheel with SARAモデルには、デフォルトとして「Realsense D435」のデプスカメラが搭載されています。ここでは、レポジトリのセットアップ手順を説明します。
 > **Warning**
@@ -233,7 +243,7 @@ $ cd ~/catkin_ws && catkin_make
 
 
 ## 動かしてみましょう！
-
+◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
 ### 実機
 この時点に付いたら、環境のセットアップは完了となります。これから、Turtlebot3 Big Wheel with SARAモデルを実際に動かしてみましょう。動作方法は、e-Manualの「[Bring-Up](https://emanual.robotis.com/docs/en/platform/turtlebot3/bringup/)」のままで進めば大丈夫です。
 
@@ -241,10 +251,9 @@ $ cd ~/catkin_ws && catkin_make
 > sshよりNUCに繋ぐとき、NUCのIPアドレス（192.168.X.XXX）を使用することになります。
 
 そして、新しいターミナルを開くたびに、Turtlebot3のモデルも指定してください。
-```code
+```code 
 $ export TURTLEBOT3_MODEL=big_wheel
 $ export TURTLEBOT3_PLAT=true
-$ export LDS_MODEL=LDS-01
 ```
 
 > **Note**
@@ -268,7 +277,7 @@ $ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 - **SLAM (地図生成) + Navigation**
 
 通常のTurtleBot3と同じ手順で実行できますので、公式のe-Manualの「[SLAM](https://emanual.robotis.com/docs/en/platform/turtlebot3/slam/)」や「[Navigation](https://emanual.robotis.com/docs/en/platform/turtlebot3/navigation/)」に従って進めてください。
-
+◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
 
 ### シミュレーション
 動作方法は、e-Manualの「[1.1.2. Launch Simulation World](https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#launch-simulation-world)」の項目ままで進めば大丈夫です。

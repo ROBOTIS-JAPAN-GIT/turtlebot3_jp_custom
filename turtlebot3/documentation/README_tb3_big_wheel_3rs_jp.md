@@ -1,7 +1,7 @@
 [日本語](/turtlebot3/documentation/README_tb3_big_wheel_3rs_jp.md) | [English](/turtlebot3/documentation/README_tb3_big_wheel_3rs_en.md)
 
 # TurtleBot3 Friends: Big Wheel 3RS
-![TB3 Big Wheel 3RS](/turtlebot3/documentation/tb3_big_wheel_3rs_bg.png)
+![TB3 Big Wheel 3RS](/turtlebot3/documentation/tb3_big_wheel_3rs.png)
 
 # 注意：Gazeboのみの対応。実機への対応中。
 <!-- ## 実環境での動作検証

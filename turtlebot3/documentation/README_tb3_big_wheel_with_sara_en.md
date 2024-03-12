@@ -1,7 +1,7 @@
 [日本語](/turtlebot3/documentation/README_tb3_big_wheel_jp.md) | [English](/turtlebot3/documentation/README_tb3_big_wheel_en.md)
 
 # TurtleBot3 Friends: Big Wheel with SARA
-![TB3 Big Wheel with SARA](/turtlebot3/documentation/tb3_big_wheel_with_sara_bg.png)
+![TB3 Big Wheel with SARA](/turtlebot3/documentation/tb3_big_wheel_with_sara.png)
 
 ## In Development Process
 <!-- # TurtleBot3 Friends: Big Wheel

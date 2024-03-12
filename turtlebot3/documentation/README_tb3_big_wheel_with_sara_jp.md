@@ -242,7 +242,7 @@ $ cd ~/catkin_ws && catkin_make
 ```
 
 
-## 動かしてみましょう！
+## 動かしてみましょう！  
 ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆　　
 ### 実機
 この時点に付いたら、環境のセットアップは完了となります。これから、Turtlebot3 Big Wheel with SARAモデルを実際に動かしてみましょう。動作方法は、e-Manualの「[Bring-Up](https://emanual.robotis.com/docs/en/platform/turtlebot3/bringup/)」のままで進めば大丈夫です。
@@ -276,7 +276,7 @@ $ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 
 - **SLAM (地図生成) + Navigation**
 
-通常のTurtleBot3と同じ手順で実行 できますので、公式のe-Manualの「[SLAM](https://emanual.robotis.com/docs/en/platform/turtlebot3/slam/)」や「[Navigation](https://emanual.robotis.com/docs/en/platform/turtlebot3/navigation/)」に従って進めてください。
+通常のTurtleBot3と同じ手順で実行 できますので、公式のe-Manualの「[SLAM](https://emanual.robotis.com/docs/en/platform/turtlebot3/slam/)」や「[Navigation](https://emanual.robotis.com/docs/en/platform/turtlebot3/navigation/)」に従って進めてください。  
 ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆　　
 ### シミュレーション
 動作方法は、e-Manualの「[1.1.2. Launch Simulation World](https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#launch-simulation-world)」の項目ままで進めば大丈夫です。

@@ -137,14 +137,13 @@ $ sudo apt-get install libc6:armhf
 3. OPENCR_MODELに```big_wheel```と書きます。
 ```code
 $ export OPENCR_PORT=/dev/ttyACM0
-$ export OPENCR_MODEL=big_wheel_humble
-$ rm -rf ./opencr_update.tar.bz2
+$ export OPENCR_MODEL=big_wheel
 ```
 
 4. ファームウェアをダウンロードして、解凍します。`TODO`
 ```code
-$ wget wget https://github.com/ROBOTIS-JAPAN-GIT/OpenCR_jp_custom/releases/download/ros2v1.0.0/opencr_update_jp_custom.tar.bz2
-$ tar -xvf opencr_update_jp_custom.tar.bz2 
+$ wget https://github.com/ROBOTIS-JAPAN-GIT/OpenCR_jp_custom/releases/download/ros2v1.0.1/opencr_update_jp_custom.tar.bz2
+$ tar -xvf opencr_update_jp_custom.tar.bz2
 ```
 
 5. OpenCRにファームウェアをアップロードします。

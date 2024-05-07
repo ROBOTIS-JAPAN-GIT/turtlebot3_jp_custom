@@ -138,6 +138,7 @@ $ sudo apt-get install libc6:armhf
 ```code
 $ export OPENCR_PORT=/dev/ttyACM0
 $ export OPENCR_MODEL=big_wheel
+$ rm -rf ./opencr_update_jp_custom.tar.bz2
 ```
 
 4. ファームウェアをダウンロードして、解凍します。`TODO`
